@@ -30,19 +30,27 @@ GO
 
 -- -111 Atributo NULL
 -- -112 Email ya existe
+-- -113 Exito
 -- Registro y login de clientes
-CREATE PROC SP_CrearNuevoCliente
+ALTER PROC SP_CrearNuevoCliente
 	@Nombre VARCHAR(50),
 	@Telefono INT,
 	@Direccion VARCHAR(50),
-	@Email VARCHAR(50)
+	@Email VARCHAR(50),
+	@Result INT OUTPUT
 AS
 	IF (@Nombre IS NULL OR @Telefono IS NULL OR @Direccion IS NULL OR @Email IS NULL)
-		SELECT -111
+	BEGIN
+		RETURN(-111)
+	END
 	ELSE
+	BEGIN
 		IF EXISTS (SELECT C.PK_ID FROM CLIENTE AS C WHERE C.Email = @Email)
-			SELECT -112
+		BEGIN
+			RETURN(-112)
+		END
 		ELSE
+		BEGIN
 			INSERT INTO CLIENTE 
 			(
 				Nombre,
@@ -57,21 +65,23 @@ AS
 				@Direccion,
 				@Email
 			)
-			GO
+			RETURN(-113)
+		END
+	END
 GO
 
--- Returns boolean in 0 and 1
--- -111 for null args
-CREATE PROC SP_DoesClientExist
-	@Email VARCHAR(50)
+
+ALTER PROC SP_DoesClientExist
+	@Email VARCHAR(50),
+	@Result INT OUTPUT
 AS
 	IF (@Email IS NULL)
-		SELECT -111
+		RETURN(-111)
 	ELSE
 		IF EXISTS ( SELECT C.PK_ID FROM CLIENTE AS C WHERE C.Email = @Email)
-			SELECT 1
+			RETURN(1)
 		ELSE 
-			SELECT 0
+			RETURN(0)
 GO
 
 -- Returns boolean in 0 and 1
@@ -80,23 +90,24 @@ CREATE PROC SP_DoesAdminExist
 	@Email VARCHAR(50)
 AS
 	IF (@Email IS NULL)
-		SELECT -111
+		RETURN(-111)
 	ELSE
 		IF EXISTS ( SELECT A.PK_ID FROM ADMINISTRADOR AS A WHERE A.Email = @Email)
-			SELECT 1
+			RETURN(1)
 		ELSE 
-			SELECT 0
+			RETURN(0)
 GO
 
 CREATE PROC SP_CrearNuevoAdmin
 	@Email VARCHAR(50)
 AS
 	IF (@Email IS NULL)
-		SELECT -111
+		RETURN(-111)
 	ELSE
 		IF EXISTS (SELECT A.PK_ID FROM ADMINISTRADOR AS A WHERE A.Email = @Email)
-			SELECT -112
+			RETURN(-112)
 		ELSE
+		BEGIN
 			INSERT INTO ADMINISTRADOR 
 			(
 				Email
@@ -105,5 +116,7 @@ AS
 			(
 				@Email
 			)
-			GO
+			RETURN(-113)
+		END
 GO
+

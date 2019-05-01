@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pizza Especial</title>
+        <meta charset="utf-8">
+	  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	  	<link rel="stylesheet" type="text/css" href="styles/PizzaEspecialMain.css"> 
+    </head>
+    <body>    
+        <div class="container">
+  			<div class="panel panel-primary">
+    			<div class="panel-heading">Pizzas Especiales</div>
+    			<div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Saborizacion de la pasta:</p>
+                            <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sabor
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Nada</a></li>
+                                <li><a href="#">Ajonjoli</a></li>
+                                <li><a href="#">Mantequilla</a></li>
+                            </ul>                
+                            </div>                            
+                        </div>
+                        <div class="col-md-4">
+                            <p>Selecione el tamaño de la pizza:</p>
+                                <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Tamaño
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Pequeña</a></li>
+                                    <li><a href="#">Mediana</a></li>
+                                    <li><a href="#">Grande</a></li>
+                                </ul>                
+                                </div>                            
+                        </div>
+                        <div class="col-md-4">
+                            <p>¿Desea la pizza con dos sabores?</p>
+                            <div class="radio">
+                                <label><input type="radio" name="optradio" checked>Un Sabor</label>
+                            </div>
+                            <div class="radio">
+                              <label><input type="radio" name="optradio">Dos Sabores</label>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary floatRight">Cancelar</button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary floatRight">Seguir</button>
+                        </div>
+                    </div>
+                </div>
+    		</div>		
+        </div>
+    </body>
+</html>

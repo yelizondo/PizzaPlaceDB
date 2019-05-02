@@ -39,19 +39,28 @@ router.post('/authentication', function (request, response) {
     }
     else
     {
-        response.send('Please enter mail');
 		response.end();
     }
 });
 
-router.get('/home', function(request, response) {
-	if (request.session.loggedIn) {
-		response.sendFile(path.join(__dirname + '/home.html'));
-	} else {
-		response.send('Please login to view this page!');
-	}
-	response.end();
+router.get('/logout', function (request, response) {
+    request.session.loggedIn = false;
+    response.redirect('/login');
 });
+
+router.get('/home', function (request, response)
+{
+    if (request.session.loggedIn) 
+    {
+        response.sendFile(path.join(__dirname + '/home.html'));
+    }
+    else
+    {
+        response.send('Please login to view this page!');
+    }
+    
+});
+
 
 router.get('/signup', function (request, response)
 {

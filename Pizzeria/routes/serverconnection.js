@@ -11,6 +11,8 @@ var dbConfig = {
 
 var connection = new sql.ConnectionPool(dbConfig);
 
+
+
 module.exports = {
 	createNewClient : function (pNombre, pTelefono, pDireccion, pMail, callback)
 	{
@@ -259,7 +261,7 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					callback(recordset);
 				}
 				connection.close();
 			});
@@ -374,6 +376,17 @@ module.exports = {
 				connection.close();
 			});
 		});
+	},
+	getDataFromProcedure : async function (procedureName) 
+{
+	try 
+	{
+	  await sql.connect(dbConfig);
+	  const request = new sql.Request();
+	  recordsets = await request.execute(procedureName);
+	  return recordsets;
+	} catch (error) {
+	  console.log(error);
 	}
-
+  }
 }

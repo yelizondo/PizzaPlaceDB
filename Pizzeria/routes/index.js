@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var dbcon = require('./serverconnection.js') ;
+var dbcon = require('./serverconnection.js');
 var session = require('express-session');
 
 

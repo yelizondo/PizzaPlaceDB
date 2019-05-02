@@ -75,5 +75,32 @@ module.exports = {
 	
 		})
 		return result;
+	},
+
+	todosLosTamannosPizza: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodosLosTamañosDePizza', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
 	}
 }

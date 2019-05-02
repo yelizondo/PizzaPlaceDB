@@ -162,5 +162,10 @@ router.get('/UnSaborFinal', function (request, response)
     response.sendFile(path.join(__dirname + '/UnSaborFinal.html'));
 });
 
+router.get('/MostrarTodosTamanosPizza', function (request, response)
+{
+    //response.sendFile(path.join(__dirname + '/UnSaborFinal.html'));
+});
+
 
 module.exports = router;

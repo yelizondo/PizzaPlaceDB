@@ -1,6 +1,6 @@
 var dbcon = require('./serverconnection.js');
 
-dbcon.todosLosTamannosPizza( function (recordset)
+dbcon.todasLasVinagretas(function(recordset)
 {
-    console.log(recordset);
+	console.log(recordset);
 });

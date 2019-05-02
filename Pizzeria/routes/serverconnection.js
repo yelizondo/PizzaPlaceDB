@@ -102,5 +102,278 @@ module.exports = {
 				connection.close();
 			});
 		});
+	},
+
+	todasLasPizzas: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodasLasPizzas', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	todasLasEnsaladas: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodasLasEnsaladas', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	todasLasBebidas: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodasLasBebidas', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	todasLasBebidas: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodasLasBebidas', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	todosLosIngredientes: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodosLosIngredientes', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	todasLasSaborizaciones: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodasLasSaborizaciones', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	ingredientesPorPizza: function (pPizza, callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.input('PizzaName', sql.VarChar(50), pPizza);
+
+			request.execute('SP_IngredientesPorPizza', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	todosLosTamannosEnsalada: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodosLosTamañosDeEnsalada', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	todosLosTamannosBebida: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodosLosTamañosDeBebida', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	todasLasVinagretas: function (callback)
+	{
+		var request = new sql.Request(connection);
+		connection.connect (function (err) 
+		{
+			if (err) 
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.execute('SP_TodasLasVinagretas', function (err, recordset, returnValue) 
+			{
+				if (err) 
+				{
+					console.log(err);
+				}
+				else 
+				{
+					callback(recordset['recordset']);
+				}
+				connection.close();
+			});
+		});
 	}
+
 }

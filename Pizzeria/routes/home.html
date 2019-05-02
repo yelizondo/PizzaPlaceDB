@@ -1,177 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Pizzeria</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="styles/home.css">
-</head>
-<body>
-
-<!-- Header -->
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Pizzería</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Inicio</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Salir</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-<!-- Container -->
-
-<div class="container">    
-  <div class="row">
-
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Pizzas Especiales</div>
-        <div class="panel-body">
-
- 
-
-        </div>
-        <div class="panel-footer">
-          <button type="button" class="btn btn-primary floatRight">Añadir al carrito</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6"> 
-      <div class="panel panel-primary">
-        <div class="panel-heading">Crear tu propia Pizza</div>
-        <div class="panel-body">
-          
-        </div>
-        <div class="panel-footer">
-          <button type="button" class="btn btn-primary float-right">Añadir al carrito</button>
-        </div>
-      </div>
-    </div>
-
-</div><br>
-<div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading">Ensaladas</div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Escoger Ensalada
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">HTML</a></li>
-                  <li><a href="#">CSS</a></li>
-                  <li><a href="#">JavaScript</a></li>
-                </ul>
+<html>
+    <head>
+        <title>Principal</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles/home.css"> 
+    </head>
+    <body>    
+      <div class="container">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Seleccione lo que desea añadir a la orden</div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="row">
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Crear Pizza</button>                          
+                  </div>                  
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Pizza Especial</button>                          
+                  </div>                  
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Ensalada</button>                          
+                  </div>                  
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Bebida</button>                          
+                  </div>                  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="table-responsive">
+                  <table class="table table-hover table-bordered table-condensed" id="Table">
+                    <tr>
+                      <th>Elemento</th>
+                      <th>Tamaño</th>
+                      <th>Cantidad</th>
+                      <th>Extras</th>
+                      <th>Precio</th>
+                    </tr>
+                    <tr>
+                      <td>BLT</td>
+                      <td>Grande</td>
+                      <td>1</td>
+                      <td>Ninguno</td>
+                      <td>12000</td>
+                    </tr>                    
+                  </table>                  
+                </div>
               </div>              
-            </div>
-            <div class="col-md-4">
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Escoger Tamaño
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">HTML</a></li>
-                  <li><a href="#">CSS</a></li>
-                  <li><a href="#">JavaScript</a></li>
-                </ul>
-              </div>              
+            </div>                                                            
+          </div>
+          <div class="panel-footer">
+            <div class="row">
+              <div class="col-md-4">
+                  <button type="button" class="btn btn-primary floatRight">Salir</button>
+              </div>
+              <div class="col-md-4">
+                  <button type="button" class="btn btn-primary floatRight">Realizar Petido</button>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-4">
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Escoger Vinagreta
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">HTML</a></li>
-                  <li><a href="#">CSS</a></li>
-                  <li><a href="#">JavaScript</a></li>
-                </ul>
-              </div>              
-            </div>
-            <div class="col-md-4">
-              <label><input type="checkbox" value="">Añadir pollo</label>
-            </div>
-            <div class="col-md-4">
-               <input type="text" class="fadeIn third" name="cantidadBebida" placeholder="Cantidad">              
-            </div>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <button type="button" class="btn btn-primary floatRight">Añadir al carrito</button>
-        </div>
+        </div>    
       </div>
-    </div>
-    <div class="col-md-6"> 
-      <div class="panel panel-primary">
-        <div class="panel-heading">Bebidas</div>
-        <div class="panel-body">
-                    <div class="row">
-            <div class="col-md-4">
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Escoger Bebida
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">HTML</a></li>
-                  <li><a href="#">CSS</a></li>
-                  <li><a href="#">JavaScript</a></li>
-                </ul>
-              </div>              
-            </div>
-            <div class="col-md-4">
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Escoger Tamaño
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">HTML</a></li>
-                  <li><a href="#">CSS</a></li>
-                  <li><a href="#">JavaScript</a></li>
-                </ul>
-              </div>              
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-               <input type="text" class="fadeIn third" name="cantidadBebida" placeholder="Cantidad">              
-            </div>
-            <div class="col-md-4">
-
-            </div>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <button type="button" class="btn btn-primary floatRight">Añadir al carrito</button>
-        </div>
-      </div>
-    </div>
-</div>
-
-<br><br>
-
-</body>
+    </body>
 </html>
 

@@ -102,5 +102,65 @@ router.post('/registration', function (request, response)
     }
 });
 
+router.get('/Bebida', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/Bebida.html'));
+});
+
+router.get('/CrearDosSaboresFinal', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/CrearDosSaboresFinal.html'));
+});
+
+router.get('/CrearPizzaMain', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/CrearPizzaMain.html'));
+});
+
+router.get('/CrearPrimeraMitad', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/CrearPrimeraMitad.html'));
+});
+
+router.get('/CrearSegundaMitad', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/CrearSegundaMitad.html'));
+});
+
+router.get('/CrearUnSaborFinal', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/CrearUnSaborFinal.html'));
+});
+
+router.get('/CrearDosSaboresFinal', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/CrearDosSaboresFinal.html'));
+});
+
+router.get('/Ensalada', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/Ensalada.html'));
+});
+
+router.get('/PizzaEspecialMain', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/PizzaEspecialMain.html'));
+});
+
+router.get('/PrimeraMitad', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/PrimeraMitad.html'));
+});
+
+router.get('/SegundaMitad', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/SegundaMitad.html'));
+});
+
+router.get('/UnSaborFinal', function (request, response)
+{
+    response.sendFile(path.join(__dirname + '/UnSaborFinal.html'));
+});
+
 
 module.exports = router;

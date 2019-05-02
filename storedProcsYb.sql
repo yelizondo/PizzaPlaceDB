@@ -86,7 +86,7 @@ GO
 
 -- Returns boolean in 0 and 1
 -- -111 for null args
-CREATE PROC SP_DoesAdminExist
+ALTER PROC SP_DoesAdminExist
 	@Email VARCHAR(50)
 AS
 	IF (@Email IS NULL)
@@ -98,7 +98,7 @@ AS
 			RETURN(0)
 GO
 
-CREATE PROC SP_CrearNuevoAdmin
+ALTER PROC SP_CrearNuevoAdmin
 	@Email VARCHAR(50)
 AS
 	IF (@Email IS NULL)

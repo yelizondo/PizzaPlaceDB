@@ -177,4 +177,24 @@ router.get('/MostrarTodosTamanosPizza', function (request, response)
 });
 
 
+router.post('/loadSaborizacionDropDown', function (request, response) 
+{
+    dbcon.todasLasSaborizaciones(callback, () => 
+    {
+        var cantidadElementos = recordset["rowsAffected"];
+        var elementos = recordset["recordset"];
+        var elementosListos = [];
+        var dropdownId = '';
+        
+        var x = document.getElementById(dropdownId);
+        var option = document.createElement("option");
+
+        for (i = 0; i < cantidadElementos; i++)
+        {
+            option.text = elementos[i]["DESCRIPCION"];
+            x.add(option, x[i]);
+        }
+    })
+});
+
 module.exports = router;

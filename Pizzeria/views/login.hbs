@@ -1,0 +1,11 @@
+<div class="loginbox">
+<img src="/images/avatar.png" class="avatar">
+    <h1>Login Here</h1>
+    <form action="/login/auth" method="POST">
+        <p>Email</p>
+        <input type="text" name="email" placeholder="Enter email" required>
+        <input type="submit" name="loginbtn" value="Login">
+        <a href="signup">Don't have an account?</a>
+    </form>   
+    <p> {{ resp }} </p>
+</div>

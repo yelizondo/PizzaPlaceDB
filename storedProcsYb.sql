@@ -120,3 +120,5 @@ AS
 		END
 GO
 
+exec SP_TodosLosTamañosDePizza
+

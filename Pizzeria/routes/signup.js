@@ -2,13 +2,16 @@ var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
 
+var responseMessage = "";
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     res.render('signup', {
         title: 'Sign Up',
         style: 'signup.css',
-        resp: ''
+        resp: responseMessage
     });
+    responseMessage = "";
 });
 
 router.post('/registration', function (request, response) 
@@ -26,24 +29,20 @@ router.post('/registration', function (request, response)
             dbcon.createNewClient(name, phone, address, email1, function (recordset) 
             {
                 if (recordset == -113) {
-                    response.send("Successful");
-                    //response.redirect('/login');
+                    response.render('login', {
+                        title: 'Login',
+                        style: 'login.css',
+                        resp: "Now sign in"
+                    });
                 }
                 else if (recordset == -112) 
                 {
-                    response.send("already in the database");
-                    /*
-                    res.render('signup', {
-                        title: 'Sign Up',
-                        style: 'signup.css',
-                        resp: 'Email already in the database'
-                    });
-                    */
+                    responseMessage = "Email already in the database";
+                    response.redirect('/signup');
                 }
                 else
                 {
-                    response.send("Unauthorized access");
-                    //response.redirect('/signup');
+                    response.redirect('/signup');
                 }
             }); 
         }
@@ -55,18 +54,14 @@ router.post('/registration', function (request, response)
                 resp: 'The two emails are different'
             });
             */
-           response.send("The two emails are different");
+            responseMessage = "The two emails are different";
+            response.redirect('/signup');
         }
     }
     else 
     {
         response.end();
     }
-});
-
-router.get('/goback_signup_button', function (request, response)
-{
-    response.redirect('/login');
 });
 
 module.exports = router;

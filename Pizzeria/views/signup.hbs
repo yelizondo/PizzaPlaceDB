@@ -1,7 +1,7 @@
 <div class="signupbox">
 <img src="/images/avatar.png" class="avatar">
     <h1>Sign Up Here</h1>
-    <form action="signup/registration" method="POST">
+    <form action="/signup/registration" method="POST">
         <p>Name</p>
         <input type="text" name="Name" placeholder="Enter Name" required>
         <p>Phone Number</p>
@@ -13,7 +13,7 @@
         <p>Re-type Email</p>
         <input type="text" name="Email2" placeholder="Enter Email" required>
         <input type="submit" name="signup" value="Sign Up">
-        <div id="button"><a href="signup/goback_signup_button">Go Back</a></div>
     </form> 
+    <div id="button"><a href="/login">Go Back</a></div>
     <p> {{ resp }} </p>  
 </div>

@@ -2,12 +2,15 @@ var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
 
+var responseMessage = "";
+
 router.get('/', function(req, res, next) {
   res.render('login', {
       title: 'Login',
       style: 'login.css',
-      resp: ''
+      resp: responseMessage
   });
+  responseMessage = "";
 });
 
 
@@ -24,11 +27,8 @@ router.post('/auth', function (request, response) {
             }
             else {
 
-                response.render('login', {
-                    title: 'Login',
-                    style: 'login.css',
-                    resp: 'User doesn\'t exist. Consider to sign up.'
-                });
+                responseMessage = 'User doesn\'t exist. Consider to sign up.';
+                response.redirect('/login');
             }
         }); 
     }

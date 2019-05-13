@@ -21,32 +21,41 @@ router.post('/registration', function (request, response)
 
     if (name && phone && address && email1 && email2) 
     {
-        if (email1 == email2) {
+        if (email1 == email2) 
+        {
             dbcon.createNewClient(name, phone, address, email1, function (recordset) 
             {
                 if (recordset == -113) {
-                    response.redirect('/login');
+                    response.send("Successful");
+                    //response.redirect('/login');
                 }
                 else if (recordset == -112) 
                 {
+                    response.send("already in the database");
+                    /*
                     res.render('signup', {
                         title: 'Sign Up',
                         style: 'signup.css',
                         resp: 'Email already in the database'
                     });
+                    */
                 }
                 else
                 {
-                    response.redirect('/signup');
+                    response.send("Unauthorized access");
+                    //response.redirect('/signup');
                 }
             }); 
         }
         else {
+            /*
             res.render('signup', {
                 title: 'Sign Up',
                 style: 'signup.css',
                 resp: 'The two emails are different'
             });
+            */
+           response.send("The two emails are different");
         }
     }
     else 

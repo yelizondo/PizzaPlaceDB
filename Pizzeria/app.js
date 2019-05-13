@@ -36,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
+app.use('/login/auth', loginRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/signup', signupRouter);
 
@@ -58,5 +59,9 @@ app.use(function(err, req, res, next) {
 app.use(bodyParser.urlencoded({extended :true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+
+app.listen(3000, () => {
+  console.log("Server started on port 3000");
+});
 
 module.exports = app;

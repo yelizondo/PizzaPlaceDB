@@ -10,10 +10,16 @@ router.use(session({
 }));
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index', {
-		title: 'index'
-	});
+router.get('/', function(req, res, next) 
+{
+	if (req.session.loggedIn)
+	{
+			res.redirect('/dashboard');
+	}
+	else
+	{
+			res.redirect('/login');
+	}
 });
 
 module.exports = router;

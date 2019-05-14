@@ -9,13 +9,12 @@ var dbConfig = {
 	encrypt: true
 };
 
-var connection = new sql.ConnectionPool(dbConfig);
-
-
 
 module.exports = {
+
 	createNewClient : function (pNombre, pTelefono, pDireccion, pMail, callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
@@ -48,6 +47,7 @@ module.exports = {
 
 	checkClientExists: function (pMail,callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var result = false;
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
@@ -81,13 +81,14 @@ module.exports = {
 
 	todosLosTamannosPizza: function (callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
 			if (err) 
 			{
-				console.log("Found error!");
-				console.log(err);
+				console.log("Found error! tamannos pizza");
+				//console.log(err);
 				return;
 			}
 
@@ -99,7 +100,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'todosLosTamannosPizza';
+					callback(recordset);
 				}
 				connection.close();
 			});
@@ -108,6 +110,7 @@ module.exports = {
 
 	todasLasPizzas: function (callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
@@ -126,7 +129,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'todasLasPizzas';
+					callback(recordset);
 				}
 				connection.close();
 			});
@@ -135,6 +139,7 @@ module.exports = {
 
 	todasLasEnsaladas: function (callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
@@ -162,33 +167,7 @@ module.exports = {
 
 	todasLasBebidas: function (callback)
 	{
-		var request = new sql.Request(connection);
-		connection.connect (function (err) 
-		{
-			if (err) 
-			{
-				console.log("Found error!");
-				console.log(err);
-				return;
-			}
-
-			request.execute('SP_TodasLasBebidas', function (err, recordset, returnValue) 
-			{
-				if (err) 
-				{
-					console.log(err);
-				}
-				else 
-				{
-					callback(recordset['recordset']);
-				}
-				connection.close();
-			});
-		});
-	},
-
-	todasLasBebidas: function (callback)
-	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
@@ -216,6 +195,7 @@ module.exports = {
 
 	todosLosIngredientes: function (callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
@@ -243,12 +223,13 @@ module.exports = {
 
 	todasLasSaborizaciones: function (callback)
 	{
-		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		var conn = new sql.ConnectionPool(dbConfig);
+		var request = new sql.Request(conn);
+		conn.connect (function (err) 
 		{
 			if (err) 
 			{
-				console.log("Found error!");
+				console.log("Found error! saborizaciones");
 				console.log(err);
 				return;
 			}
@@ -261,15 +242,17 @@ module.exports = {
 				}
 				else 
 				{
+					recordset.spName = 'saborizaciones';
 					callback(recordset);
 				}
-				connection.close();
+				conn.close();
 			});
 		});
 	},
 
 	ingredientesPorPizza: function (pPizza, callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
@@ -299,6 +282,7 @@ module.exports = {
 
 	todosLosTamannosEnsalada: function (callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
@@ -326,6 +310,7 @@ module.exports = {
 
 	todosLosTamannosBebida: function (callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{
@@ -353,6 +338,7 @@ module.exports = {
 
 	todasLasVinagretas: function (callback)
 	{
+		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err) 
 		{

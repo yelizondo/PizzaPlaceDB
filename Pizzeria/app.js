@@ -13,6 +13,7 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var dashboardRouter = require('./routes/dashboard');
 var signupRouter = require('./routes/signup');
+var CrearPizzaMainRouter = require('./routes/CrearPizzaMain');
 
 
 var app = express();
@@ -39,6 +40,7 @@ app.use('/login', loginRouter);
 app.use('/login/auth', loginRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/signup', signupRouter);
+app.use('/CrearPizzaMain', CrearPizzaMainRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

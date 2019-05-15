@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Pizzas Especiales</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Saborizacion de la pasta:</p>
+                    <form>
+                        <select id="table1">
+                            {{#each resSaborizaciones}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}                           
+                        </select>
+                    </form>                            
+                </div>
+                <div class="col-md-4">
+                    <p>Selecione el tamaño de la pizza:</p>
+                    <form>
+                        <select id="table2">
+                            {{#each resTamannosPizza}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}                            
+                        </select>
+                    </form>                          
+                </div>
+                <div class="col-md-4">
+                    <p>¿Desea la pizza con dos sabores?</p>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio" checked>Un Sabor</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="optradio">Dos Sabores</label>
+                    </div>
+                </div>                       
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Cancelar</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Seguir</button>
+                </div>
+            </div>
+        </div>
+    </div>		
+</div>

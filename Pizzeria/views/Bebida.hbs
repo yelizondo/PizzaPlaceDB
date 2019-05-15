@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Bebida</div>
+        <div class="panel-body">
+            <h1>Ajustar Bebida:</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Seleccione la Bebida que desea:</p>
+                    <form>
+                        <select id="table1">
+                            {{#each resBebidas}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </form>
+                    <p>Seleccione el tamaño que desea:</p>
+                    <form>
+                        <select id="table2">
+                            {{#each resTamannoBebidas}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}                            
+                        </select>
+                    </form>                                                                                   
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad de Bebidas:</label>
+                        <input type="text" class="form-control" id="cantidad">
+                    </div>                           
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Cancelar</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Añadir al Carrito</button>
+                </div> 
+            </div>
+        </div>
+    </div>		
+</div>

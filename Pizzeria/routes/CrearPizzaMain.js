@@ -26,19 +26,31 @@ router.get('/', function(req, res, next)
 
 router.post('/iniciarCreacion', (req, res) => 
 {
-    var saborizacion = req.body.saborizaciones;
-    var tamannos = req.body.tamannos;
-    var cantSabores = req.body.chooseone;
+    var bodySaborizacion = req.body.saborizaciones;
+    var bodyTamannos = req.body.tamannos;
+    var bodyCantSabores = req.body.chooseone;
 
-    if (cantSabores === "UnSabor")
+    if (bodyCantSabores === "UnSabor")
     {
-
+        res.redirect('/CrearUnSaborFinal?tamanno='+ bodyTamannos +'&saborizacion=' + bodySaborizacion);
+        /*
+       res.render('CrearUnSaborFinal', {
+            title: 'Crear Pizza',
+            style: 'CrearUnSaborFinal.css',
+            tamannos: bodyTamannos,
+            saborizacion: bodySaborizacion
+        });
+        */
     }
     else
     {
-
+        res.render('CrearPrimeraMitad', {
+            title: 'Crear Pizza',
+            style: 'CrearPrimeraMitad.css',
+            tamannos: bodyTamannos,
+            saborizacion: bodySaborizacion
+        });
     }
-    console.log(saborizacion,tamannos,cantSabores);
 });
 
 module.exports = router;

@@ -9,4 +9,9 @@ router.get('/', function(req, res, next) {
     });
 });
 
+// Tomar el id de session
+router.get('/addToCart', (req, res, next) => {
+
+});
+
 module.exports = router;

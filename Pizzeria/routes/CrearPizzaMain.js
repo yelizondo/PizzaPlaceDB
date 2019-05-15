@@ -8,7 +8,6 @@ var tamannosPizza = ["Escoger el tamaño"];
 
 router.get('/', function(req, res, next) 
 {
-    // Query todas las saborizaciones
     dtCPM.getStoredProcs([
         [dbcon.todasLasSaborizaciones,"DESCRIPCION"],
         [dbcon.todosLosTamannosPizza, "Descripcion"]
@@ -22,17 +21,16 @@ router.get('/', function(req, res, next)
     });
 });
 
-
-
 router.post('/iniciarCreacion', (req, res) => 
 {
     var saborizacion = req.body.saborizaciones;
     var tamannos = req.body.tamannos;
     var cantSabores = req.body.chooseone;
 
-    if (cantSabores === "UnSabor")
-    {
 
+    if (cantSabores == "UnSabor")
+    {
+        
     }
     else
     {

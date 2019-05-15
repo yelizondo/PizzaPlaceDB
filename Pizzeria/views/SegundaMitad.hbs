@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Pizzas Especiales - Segunda Mitad</div>
+        <div class="panel-body">
+            <h1>Crear la segunda mitad de la pizza:</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Seleccione la pizza que desea:</p>
+                    <form>
+                        <select id="table1">
+                            {{#each resPizzas}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}                            
+                        </select>
+                    </form>                          
+                </div>
+                <div class="col-md-4">
+                    <p>Selecione los ingredientes que desea:</p>
+                    <div class="table-responsive">
+                        <table class= "table table-hover table-condensed table-bordered" id="tablePM">
+                            <tr>
+                                <th>Ingrediente</th>
+                                <th>Agregar</th>
+                                <th>Extra</th>
+                            </tr>
+                            {{#each resIngredientes}}
+                                <tr> 
+                                    <td>{{this}}</td>
+                                    <td><input type="checkbox" name="check-tab1"></td>
+                                    <td><input type="checkbox" name="check-tab1"></td>
+                                </tr>
+                            {{/each}}                             
+                        </table>
+                    </div>                            
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Volver</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary floatRight">Seguir</button>
+                </div>
+            </div>
+        </div>
+    </div>      
+</div>

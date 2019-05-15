@@ -14,7 +14,17 @@ var loginRouter = require('./routes/login');
 var dashboardRouter = require('./routes/dashboard');
 var signupRouter = require('./routes/signup');
 var CrearPizzaMainRouter = require('./routes/CrearPizzaMain');
-
+var CrearUnSaborFinal = require('./routes/CrearUnSaborFinal');
+var Bebida = require('./routes/Bebida');
+var CrearDosSaboresFinal = require('./routes/CrearDosSaboresFinal');
+var CrearPrimeraMitad = require('./routes/CrearPrimeraMitad');
+var CrearSegundaMitad = require('./routes/CrearSegundaMitad');
+var DosSaboresFinal = require('./routes/DosSaboresFinal');
+var Ensalada = require('./routes/Ensalada');
+var PizzaEspecialMain = require('./routes/PizzaEspecialMain');
+var PrimeraMitad = require('./routes/PrimeraMitad');
+var SegundaMitad = require('./routes/SegundaMitad');
+var UnSaborFinal = require('./routes/UnSaborFinal');
 
 var app = express();
 
@@ -41,6 +51,17 @@ app.use('/login/auth', loginRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/signup', signupRouter);
 app.use('/CrearPizzaMain', CrearPizzaMainRouter);
+app.use('/CrearUnSaborFinal', CrearUnSaborFinal);
+app.use('/Bebida', Bebida);
+app.use('/CrearDosSaboresFinal', CrearDosSaboresFinal);
+app.use('/CrearPrimeraMitad', CrearPrimeraMitad);
+app.use('/CrearSegundaMitad', CrearSegundaMitad);
+app.use('/DosSaboresFinal', DosSaboresFinal);
+app.use('/Ensalada', Ensalada);
+app.use('/PizzaEspecialMain', PizzaEspecialMain);
+app.use('/PrimeraMitad', PrimeraMitad);
+app.use('/SegundaMitad', SegundaMitad);
+app.use('/UnSaborFinal', UnSaborFinal);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

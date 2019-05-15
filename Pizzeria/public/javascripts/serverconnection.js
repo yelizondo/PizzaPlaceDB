@@ -158,7 +158,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'todasLasEnsaladas';
+					callback(recordset);
 				}
 				connection.close();
 			});
@@ -186,7 +187,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'todasLasBebidas';
+					callback(recordset);
 				}
 				connection.close();
 			});
@@ -214,7 +216,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'todosLosIngredientes';
+					callback(recordset);
 				}
 				connection.close();
 			});
@@ -301,7 +304,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'todosLostamannosEnsalada';
+					callback(recordset);
 				}
 				connection.close();
 			});
@@ -329,7 +333,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'todosLosTamannosBebida';
+					callback(recordset);
 				}
 				connection.close();
 			});
@@ -357,7 +362,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'todasLasVinagretas';
+					callback(recordset);
 				}
 				connection.close();
 			});

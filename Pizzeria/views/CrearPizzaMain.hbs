@@ -1,52 +1,54 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">Crear Pizza</div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <p>Saborizacion de la pasta:</p>
-                    <form>
-                        <select id="table1">
-                            {{#each resSaborizaciones}}
-                                <option value="{{this}}">{{this}}</option>
-                            {{/each}}
-                        </select>
-                    </form>                            
-                </div>
-                <div class="col-md-4">
-                    <p>Selecione el tamaño de la pizza:</p>
-                    <form>
-                        <select id="table1">
-                            {{#each resTamannos}}
-                                <option value="{{this}}">{{this}}</option>
-                            {{/each}}
-                        </select>
-                    </form>                           
-                </div>
-                <div class="col-md-4">
-                    <p>¿Desea la pizza con dos sabores?</p>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio" checked>Un Sabor</label>
+        <form action="CrearPizzaMain/iniciarCreacion" method='POST'>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p>Saborizacion de la pasta:</p>
+                        <div>
+                            <select id="table1" name="saborizaciones">
+                                {{#each resSaborizaciones}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>                            
                     </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio">Dos Sabores</label>
+                    <div class="col-md-4">
+                        <p>Selecione el tamaño de la pizza:</p>
+                        <div>
+                            <select id="table1" name="tamannos">
+                                {{#each resTamannos}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>                           
                     </div>
-                </div>                       
+                    <div class="col-md-4">
+                        <div name="radioBox">
+                            <p>¿Desea la pizza con dos sabores?</p> 
+                            <input type="radio" name="chooseone" value="UnSabor">
+                            <label for="UnSabor"> Un Sabor</label><br> 
+                            <input type="radio" name="chooseone" value="DosSabores">
+                            <label for="DosSabores"> Dos Sabores</label><br>
+                        </div>
+                    </div>                       
+                </div>
             </div>
-        </div>
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-4">
-                        <a href="home" class="btn btn-primary">
-                                <span class="btn btn-primary floatRight"></span> Cancelar
-                            </a> 
-                </div>
-                <div class="col-md-4">
-                        <a href="loadSaborizacionDropDown" class="btn btn-primary">
-                                <span class="btn btn-primary floatRight"></span> Seguir
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="dashboard" class="btn btn-primary">
+                            Cancelar
                         </a> 
+                    </div>
+                    <div class="col-md-4">               
+                        <input type="submit" class="btn btn-primary" name="seguir" value="Seguir">               
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>		
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/radioFunctionality.js"></script>

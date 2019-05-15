@@ -5,6 +5,7 @@ var dbcon = require('../public/javascripts/serverconnection.js');
 var responseMessage = "";
 
 router.get('/', function(req, res, next) {
+    
   res.render('login', {
       title: 'Login',
       style: 'login.css',
@@ -12,7 +13,6 @@ router.get('/', function(req, res, next) {
   });
   responseMessage = "";
 });
-
 
 router.post('/auth', function (request, response) {
     var email = request.body.email;

@@ -22,8 +22,23 @@ router.get('/', function(req, res, next)
     });
 });
 
-router.post('/', (req, res) => {
 
+
+router.post('/iniciarCreacion', (req, res) => 
+{
+    var saborizacion = req.body.saborizaciones;
+    var tamannos = req.body.tamannos;
+    var cantSabores = req.body.chooseone;
+
+    if (cantSabores === "UnSabor")
+    {
+
+    }
+    else
+    {
+
+    }
+    console.log(saborizacion,tamannos,cantSabores);
 });
 
 module.exports = router;

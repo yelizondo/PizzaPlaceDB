@@ -8,7 +8,8 @@ router.get('/', function(req, res, next)
     dtCPM.getStoredProcs([
         [dbcon.todasLasEnsaladas,"Descripcion"],
         [dbcon.todosLosTamannosEnsalada, "Descripcion"],
-        [dbcon.todasLasVinagretas, "Descripcion"]
+        [dbcon.todasLasVinagretas, "Descripcion"],
+        [dbcon.todosLosIngredientes, "DESCRIPCION"]
     ], (result) => {
         console.log(result);
         res.render('Ensalada', {
@@ -16,7 +17,8 @@ router.get('/', function(req, res, next)
             style: 'Ensalada.css',
             resEnsaladas: result.todasLasEnsaladas,
             resTamannosEnsalada: result.todosLostamannosEnsalada,
-            resVinagretas: result.todasLasVinagretas
+            resVinagretas: result.todasLasVinagretas,
+            resIngredientes: result.todosLosIngredientes
         });
     });
 });

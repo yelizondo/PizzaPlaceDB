@@ -1,48 +1,52 @@
 <div class="container">
     <div class="panel panel-primary">
-        <div class="panel-heading">Pizzas Especiales</div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <p>Saborizacion de la pasta:</p>
-                    <form>
-                        <select id="table1">
-                            {{#each resSaborizaciones}}
-                                <option value="{{this}}">{{this}}</option>
-                            {{/each}}                           
-                        </select>
-                    </form>                            
-                </div>
-                <div class="col-md-4">
-                    <p>Selecione el tamaño de la pizza:</p>
-                    <form>
-                        <select id="table2">
-                            {{#each resTamannosPizza}}
-                                <option value="{{this}}">{{this}}</option>
-                            {{/each}}                            
-                        </select>
-                    </form>                          
-                </div>
-                <div class="col-md-4">
-                    <p>¿Desea la pizza con dos sabores?</p>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio" checked>Un Sabor</label>
+        <div class="panel-heading">Pizza Especial</div>
+        <form action="CrearPizzaMain/iniciarCreacion" method='POST'>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <p>Saborizacion de la pasta:</p>
+                        <div>
+                            <select id="table1" name="saborizaciones">
+                                {{#each resSaborizaciones}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>                            
                     </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio">Dos Sabores</label>
+                    <div class="col-md-4">
+                        <p>Selecione el tamaño de la pizza:</p>
+                        <div>
+                            <select id="table1" name="tamannos">
+                                {{#each resTamannosPizza}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>                           
                     </div>
-                </div>                       
-            </div>
-        </div>
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Cancelar</button>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Seguir</button>
+                    <div class="col-md-4">
+                        <div name="radioBox">
+                            <p>¿Desea la pizza con dos sabores?</p> 
+                            <input type="radio" name="chooseone" value="UnSabor" checked>
+                            <label for="UnSabor"> Un Sabor</label><br> 
+                            <input type="radio" name="chooseone" value="DosSabores">
+                            <label for="DosSabores"> Dos Sabores</label><br>
+                        </div>
+                    </div>                       
                 </div>
             </div>
-        </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="dashboard" class="btn btn-primary">
+                            Cancelar
+                        </a> 
+                    </div>
+                    <div class="col-md-4">               
+                        <input type="submit" class="btn btn-primary" name="seguir" value="Seguir">               
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>		
 </div>

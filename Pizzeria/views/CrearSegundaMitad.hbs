@@ -13,26 +13,13 @@
                                     <th>Agregar</th>
                                     <th>Extra</th>
                                 </tr>
-                                <tr>
-                                    <td>Queso Cheddar</td>
+                            {{#each resIngredientes}}
+                                <tr> 
+                                    <td>{{this}}</td>
                                     <td><input type="checkbox" name="check-tab1"></td>
                                     <td><input type="checkbox" name="check-tab1"></td>
                                 </tr>
-                                <tr>
-                                    <td>Jamon</td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                </tr>
-                                <tr>
-                                    <td>Pollo</td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                </tr>
-                                    <tr>
-                                    <td>Salami</td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                </tr>
+                            {{/each}}                                 
                             </table>
                         </div>                            
                     </div>

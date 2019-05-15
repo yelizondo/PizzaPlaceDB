@@ -8,7 +8,6 @@ var tamannosPizza = ["Escoger el tamaño"];
 
 router.get('/', function(req, res, next) 
 {
-    // Query todas las saborizaciones
     dtCPM.getStoredProcs([
         [dbcon.todasLasSaborizaciones,"DESCRIPCION"],
         [dbcon.todosLosTamannosPizza, "Descripcion"]
@@ -22,8 +21,6 @@ router.get('/', function(req, res, next)
     });
 });
 
-
-
 router.post('/iniciarCreacion', (req, res) => 
 {
     var bodySaborizacion = req.body.saborizaciones;
@@ -32,15 +29,9 @@ router.post('/iniciarCreacion', (req, res) =>
 
     if (bodyCantSabores === "UnSabor")
     {
-        res.redirect('/CrearUnSaborFinal?tamanno='+ bodyTamannos +'&saborizacion=' + bodySaborizacion);
-        /*
-       res.render('CrearUnSaborFinal', {
-            title: 'Crear Pizza',
-            style: 'CrearUnSaborFinal.css',
-            tamannos: bodyTamannos,
-            saborizacion: bodySaborizacion
-        });
-        */
+        res.redirect('/CrearUnSaborFinal?tamanno='+
+        bodyTamannos +'&saborizacion=' +
+        bodySaborizacion + "&tipoPizza=unSabor");
     }
     else
     {

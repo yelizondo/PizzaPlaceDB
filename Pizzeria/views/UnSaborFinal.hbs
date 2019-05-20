@@ -1,18 +1,19 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">Pizzas Especiales</div>
+        <form method="POST" action="/UnSaborFinal/finalizarUnSabor">
         <div class="panel-body">
             <h1>Ajustar Pizza:</h1>
             <div class="row">
                 <div class="col-md-4">
                     <p>Seleccione la pizza que desea:</p>
-                    <form>
+                    <div>
                         <select id="table1">
                             {{#each resPizzas}}
                                 <option value="{{this}}">{{this}}</option>
                             {{/each}}                              
                         </select>
-                    </form>                           
+                    </div>                           
                 </div>
                 <div class="col-md-4">
                     <p>Selecione los ingredientes que desea:</p>
@@ -34,9 +35,9 @@
                     </div>                            
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="div-group">
                         <label for="cantidad">Cantidad de pizzas:</label>
-                        <input type="text" class="form-control" id="cantidad">
+                        <input type="text" class="div-control" id="cantidad">
                     </div>                           
                 </div>
             </div>
@@ -44,15 +45,20 @@
         <div class="panel-footer">
             <div class="row">
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Cancelar Pedido</button>
+                    <a href="dashboard" class="btn btn-primary">
+                        Cancelar Pedido
+                    </a> 
                 </div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Volver</button>
+                    <a href="Bebida" class="btn btn-primary">
+                        Volver
+                    </a>
                 </div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Añadir al Carrito</button>
+                    <input type="submit" class="btn btn-primary" name="addToCart" value="Añadir al carrito"> 
                 </div> 
             </div>
         </div>
+        </form>
     </div>		
 </div>

@@ -31,7 +31,7 @@ router.post('/iniciarCreacion', (req, res) =>
     {
         res.redirect('/CrearUnSaborFinal?tamanno='+
         bodyTamannos +'&saborizacion=' +
-        bodySaborizacion + "&tipoPizza=unSabor");
+        bodySaborizacion + "&tipoOrden=unSabor");
     }
     else
     {

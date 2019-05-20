@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
@@ -5,7 +6,7 @@ var dtCPM = require('../public/javascripts/querier.js');
 
 var pizzaEnConstruccion = {};
 
-function cleanIng(ing) 
+function cleanIng(ing)
 {
     return ing.split('-',2)[1];
 }
@@ -33,11 +34,11 @@ router.post('/finalizarUnSabor', (req, res, next) => {
     var listIng = [];
 
 
-    for (var key in req.body) 
+    for (var key in req.body)
     {
         var ing = {};
 
-        if (key !== 'cantidad' && key !== 'addToCart') 
+        if (key !== 'cantidad' && key !== 'addToCart')
         {
             if (key[0] === 'a')
             {
@@ -48,9 +49,9 @@ router.post('/finalizarUnSabor', (req, res, next) => {
             else if (key[0] === 'e')
             {
 
-                let obj = listIng.find((o, i) => 
+                let obj = listIng.find((o, i) =>
                 {
-                    if (o.name === cleanIng(key)) 
+                    if (o.name === cleanIng(key))
                     {
                         listIng[i] = { name: cleanIng(key), extra: true };
                     }
@@ -59,8 +60,8 @@ router.post('/finalizarUnSabor', (req, res, next) => {
         }
     }
 
-    pizzaEnConstruccion.ingredientes = listIng;    
-    
+    pizzaEnConstruccion.ingredientes = listIng;
+
     var info = "?order=" + JSON.stringify(pizzaEnConstruccion);
 
     res.redirect('/dashboard/addToCart' + info);

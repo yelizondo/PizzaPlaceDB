@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
 
@@ -14,10 +15,10 @@ router.get('/', function(req, res, next) {
 
 // Tomar el id de session
 router.get('/addToCart', (req, res, next) => {
-    console.log(obj);
+    console.log(JSON.parse(req.query.order));
     switch(req.query.tipoOrden){
-        case 'bebida':     
-            Orden.push({elemento: req.query.bebida, 
+        case 'bebida':
+            Orden.push({elemento: req.query.bebida,
                             tamanno: req.query.tamanno,
                             cantidad: req.query.cantidad,
                             extras: 'ninguno',
@@ -25,8 +26,8 @@ router.get('/addToCart', (req, res, next) => {
                         });
             break;
         case 'ensalada':
-            var obj = JSON.parse(req.query.order);             
-            Orden.push({elemento: obj.tipo, 
+            var obj = JSON.parse(req.query.order);
+            Orden.push({elemento: obj.tipo,
                 tamanno: obj.tamanno,
                 cantidad: obj.cantidad,
                 extras: obj.vinagreta,

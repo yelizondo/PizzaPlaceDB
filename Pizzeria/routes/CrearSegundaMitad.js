@@ -5,14 +5,18 @@ var dtCPM = require('../public/javascripts/querier.js');
 
 var pizzaEnConstruccion = {};
 
-function cleanIng(ing) 
+function cleanIng(ing)
 {
     return ing.split('-',2)[1];
 }
 
-router.get('/', function(req, res, next) 
+router.get('/', function(req, res, next)
 {
-    pizzaEnConstruccion = JSON.parse(req.query.order);
+    if (pizzaEnConstruccion = JSON.parse(req.query.order))
+    {
+      pizzaEnConstruccion = JSON.parse(req.query.order);
+    }
+
     // Query todas las saborizaciones
     dtCPM.getStoredProcs([
         [dbcon.todosLosIngredientes, "DESCRIPCION"]
@@ -30,11 +34,11 @@ router.post('/readySecond', (req, res, next) => {
 
     var listIng = [];
 
-    for (var key in req.body) 
+    for (var key in req.body)
     {
         var ing = {};
 
-        if (key !== 'cantidad' && key !== 'addToCart') 
+        if (key !== 'cantidad' && key !== 'addToCart')
         {
             if (key[0] === 'a')
             {
@@ -45,9 +49,9 @@ router.post('/readySecond', (req, res, next) => {
             else if (key[0] === 'e')
             {
 
-                let obj = listIng.find((o, i) => 
+                let obj = listIng.find((o, i) =>
                 {
-                    if (o.name === cleanIng(key)) 
+                    if (o.name === cleanIng(key))
                     {
                         listIng[i] = { name: cleanIng(key), extra: true };
                     }
@@ -56,9 +60,9 @@ router.post('/readySecond', (req, res, next) => {
         }
     }
 
-    pizzaEnConstruccion.ingredientesP2 = listIng; 
+    pizzaEnConstruccion.ingredientesP2 = listIng;
 
-    res.redirect('/dashboard/addToCart?order=' + JSON.stringify(pizzaEnConstruccion));
+    res.redirect('/DosSaboresFinal?order=' + JSON.stringify(pizzaEnConstruccion));
 });
 
 module.exports = router;

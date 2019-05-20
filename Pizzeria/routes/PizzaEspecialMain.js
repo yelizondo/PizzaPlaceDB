@@ -1,9 +1,10 @@
+/*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
 var dtCPM = require('../public/javascripts/querier.js');
 
-router.get('/', function(req, res, next) 
+router.get('/', function(req, res, next)
 {
     // Query todas las saborizaciones
     dtCPM.getStoredProcs([
@@ -19,7 +20,7 @@ router.get('/', function(req, res, next)
     });
 });
 
-router.post('/iniciarCreacion', (req, res) => 
+router.post('/iniciarCreacion', (req, res) =>
 {
     var bodySaborizacion = req.body.saborizaciones;
     var bodyTamannos = req.body.tamannos;
@@ -33,7 +34,7 @@ router.post('/iniciarCreacion', (req, res) =>
     }
     else
     {
-        res.redirect('/DosSaboresFinal?tamanno=' +
+        res.redirect('/PrimeraMitad?tamanno=' +
         bodyTamannos +'&saborizacion=' +
         bodySaborizacion + "&tipoPizza=dosSabores");
     }

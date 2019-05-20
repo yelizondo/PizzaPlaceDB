@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
@@ -5,12 +6,12 @@ var dtCPM = require('../public/javascripts/querier.js');
 
 var pizzaEnConstruccion = {};
 
-function cleanIng(ing) 
+function cleanIng(ing)
 {
     return ing.split('-',2)[1];
 }
 
-router.get('/', function(req, res, next) 
+router.get('/', function(req, res, next)
 {
     pizzaEnConstruccion.tamanno = req.query.tamanno;
     pizzaEnConstruccion.saborizacion = req.query.saborizacion;
@@ -20,11 +21,11 @@ router.get('/', function(req, res, next)
         [dbcon.todasLasPizzas,"Descripcion"],
         [dbcon.todosLosIngredientes, "DESCRIPCION"]
     ], (result) => {
-        
+
         if (pizzaEnConstruccion.name === "")
         {
             var ipx = [];
-            
+
             for (var i = 0; i < result.todosLosIngredientes.length; i++ )
             {
                 ipx.push(result.todosLosIngredientes[i])
@@ -32,11 +33,11 @@ router.get('/', function(req, res, next)
 
             var allIng = [];
 
-            for (let i = 0; i < ipx.length; i++) 
+            for (let i = 0; i < ipx.length; i++)
             {
-                allIng.push({ingrediente: ipx[i], check: false});                    
+                allIng.push({ingrediente: ipx[i], check: false});
             }
-            
+
             res.render('UnSaborFinal', {
                 title: 'Seleccionar Pizza',
                 style: 'UnSaborFinal.css',
@@ -44,31 +45,31 @@ router.get('/', function(req, res, next)
                 resIngredientes:allIng
             });
         }
-        else 
-        { 
-            dbcon.ingredientesPorPizza(pizzaEnConstruccion.name, (recordset) => 
+        else
+        {
+            dbcon.ingredientesPorPizza(pizzaEnConstruccion.name, (recordset) =>
             {
                 var ixp = [];
-               
-                for (var i = 0; i < recordset['recordset'].length; i++ )
+
+                for (var i = 0; i < recordset.recordset.length; i++ )
                 {
-                    ixp.push(recordset['recordset'][i].Descripcion)
+                    ixp.push(recordset.recordset[i].Descripcion)
                 }
-                
+
                 var allIng = [];
 
-                for (let i = 0; i < result.todosLosIngredientes.length; i++) 
+                for (let i = 0; i < result.todosLosIngredientes.length; i++)
                 {
                     if (ixp.includes(result.todosLosIngredientes[i]))
                     {
                         var obj = {ingrediente: result.todosLosIngredientes[i], check: true};
                         allIng.push(obj);
-                    }    
+                    }
                     else
                     {
                         var obj = {ingrediente: result.todosLosIngredientes[i], check: false};
                         allIng.push(obj);
-                    }                
+                    }
                 }
 
                 res.render('UnSaborFinal', {
@@ -92,15 +93,15 @@ router.post('/setIngredientes', (req, res, next) => {
     res.redirect('/UnSaborFinal');
 });
 
-function prepareIngredients(body) 
+function prepareIngredients(body)
 {
     var listIng = [];
 
-    for (var key in body) 
+    for (var key in body)
     {
         var ing = {};
 
-        if (key !== 'CantidadPizzas' && key !== 'addToCart') 
+        if (key !== 'CantidadPizzas' && key !== 'addToCart')
         {
             if (key[0] === 'a')
             {
@@ -111,9 +112,9 @@ function prepareIngredients(body)
             else if (key[0] === 'e')
             {
 
-                let obj = listIng.find((o, i) => 
+                let obj = listIng.find((o, i) =>
                 {
-                    if (o.name === cleanIng(key)) 
+                    if (o.name === cleanIng(key))
                     {
                         listIng[i] = { name: cleanIng(key), extra: true };
                     }
@@ -124,12 +125,12 @@ function prepareIngredients(body)
     return listIng;
 }
 
-router.post('/finishUnSaborEspecial', (req, res) => 
+router.post('/finishUnSaborEspecial', (req, res) =>
 {
     pizzaEnConstruccion.cantidad = req.body.CantidadPizzas;
 
-    pizzaEnConstruccion.ingredientes = prepareIngredients(req.body);    
-    
+    pizzaEnConstruccion.ingredientes = prepareIngredients(req.body);
+
     var info = "?order=" + JSON.stringify(pizzaEnConstruccion);
 
     res.redirect('/dashboard/addToCart' + info);

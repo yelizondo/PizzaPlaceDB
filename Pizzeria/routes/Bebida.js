@@ -10,7 +10,6 @@ router.get('/', function(req, res, next)
         [dbcon.todasLasBebidas,"Descripcion"],
         [dbcon.todosLosTamannosBebida, "Descripcion"]
     ], (result) => {
-        console.log(result);
         res.render('Bebida', {
             title: 'Seleccionar Bebida',
             style: 'Bebida.css',
@@ -18,6 +17,17 @@ router.get('/', function(req, res, next)
             resTamannoBebidas: result.todosLosTamannosBebida
         });
     });
+});
+
+router.post('/iniciarCreacion', (req, res) => 
+{
+    var bodyBebida = req.body.bebida;
+    var bodyTamanno = req.body.tamanno;
+    var bodyCantBebidas = req.body.cantidad;
+
+    var items = '?bebida=' + bodyBebida + '&tamanno=' + bodyTamanno + '&cantidad=' + bodyCantBebidas + "&tipoOrden=bebida";
+    
+    res.redirect('/dashboard/addToCart' + items);
 });
 
 module.exports = router;

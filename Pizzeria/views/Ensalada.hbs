@@ -1,35 +1,36 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">Ensalada</div>
+        <form action="/Ensalada/iniciarCreacion" method='POST'>
         <div class="panel-body">
             <h1>Ajustar Ensalada:</h1>
             <div class="row">
                 <div class="col-md-4">
                     <p>Seleccione la ensalada que desea:</p>
-                    <form>
-                        <select id="table1">
+                    <div>
+                        <select id="table1" name="ensalada">
                             {{#each resEnsaladas}}
                                 <option value="{{this}}">{{this}}</option>
                             {{/each}}                            
                         </select>
-                    </form>
+                    </div>
                     <p>Seleccione el tamaño que desea:</p>
-                    <form>
-                        <select id="table2">
+                    <div>
+                        <select id="table2" name="tamanno">
                             {{#each resTamannosEnsalada}}
                                 <option value="{{this}}">{{this}}</option>
                             {{/each}}
                         </select>
-                    </form>
+                    </div>
                     <p>Adicionar Vinagreta:</p>
-                    <form>
-                        <select id="table3">
+                    <div>
+                        <select id="table3" name="vinagreta">
                             <option value="Ninguna" selected>Ninguna</option>
                             {{#each resVinagretas}}
                                 <option value="{{this}}">{{this}}</option>
                             {{/each}}
                         </select>
-                    </form>                                                                                      
+                    </div>                                                                                      
                 </div>
                 <div class="col-md-4">
                     <p>Selecione los ingredientes que desea:</p>
@@ -41,22 +42,22 @@
                                 <th>Extra</th>
                             </tr>
                             {{#each resIngredientes}}
-                                <tr> 
+                                <tr name="ingrediente"> 
                                     <td>{{this}}</td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
+                                    <td><input type="checkbox" name="ag-{{this}}"></td>
+                                    <td><input type="checkbox" name="ex-{{this}}"></td>
                                 </tr>
                             {{/each}}                             
                         </table>
                     </div>                            
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="div-group">
                         <label for="cantidad">Cantidad de ensaladas:</label>
-                        <input type="text" class="form-control" id="cantidad">
+                        <input name="cantidad" type="text" class="form-control" id="cantidad" required>
                     </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="">Añadir Pollo</label>
+                    <div class="checkbox" name="checkbox">
+                        <label><input type="checkbox" name="pollo">Añadir Pollo</label>
                     </div>                            
                 </div>
             </div>
@@ -64,12 +65,15 @@
         <div class="panel-footer">
             <div class="row">
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Cancelar</button>
+                    <a href="dashboard" class="btn btn-primary">
+                        Cancelar
+                    </a>
                 </div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Añadir al Carrito</button>
+                    <input type="submit" class="btn btn-primary" name="Añadir al Carrito" value="Añadir al Carrito">
                 </div> 
             </div>
         </div>
+        </form>
     </div>		
 </div>

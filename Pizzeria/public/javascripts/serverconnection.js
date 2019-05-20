@@ -276,7 +276,8 @@ module.exports = {
 				}
 				else 
 				{
-					callback(recordset['recordset']);
+					recordset.spName = 'ingredientesPorPizza';
+					callback(recordset);
 				}
 				connection.close();
 			});

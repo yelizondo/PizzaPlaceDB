@@ -35,12 +35,9 @@ router.post('/iniciarCreacion', (req, res) =>
     }
     else
     {
-        res.render('CrearPrimeraMitad', {
-            title: 'Crear Pizza',
-            style: 'CrearPrimeraMitad.css',
-            tamannos: bodyTamannos,
-            saborizacion: bodySaborizacion
-        });
+        res.redirect('/CrearPrimeraMitad?tamanno=' +
+        bodyTamannos +'&saborizacion=' +
+        bodySaborizacion + "&tipoPizza=dosSabores");
     }
 });
 

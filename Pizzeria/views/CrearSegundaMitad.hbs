@@ -1,8 +1,9 @@
 <div class="container">
-        <div class="panel panel-primary">
-            <div class="panel-heading">Crear - Segunda Mitad</div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Crear Pizza - Segunda Mitad</div>
+        <form method="POST" action="/CrearSegundaMitad/readySecond">
             <div class="panel-body">
-                <h1>Crear la segunda mitad de la pizza:</h1>
+                <h1>Crear la primera mitad de la pizza:</h1>
                 <div class="row">
                     <div class="col-md-4">
                         <p>Selecione los ingredientes que desea:</p>
@@ -13,13 +14,13 @@
                                     <th>Agregar</th>
                                     <th>Extra</th>
                                 </tr>
-                            {{#each resIngredientes}}
-                                <tr> 
-                                    <td>{{this}}</td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                </tr>
-                            {{/each}}                                 
+                                {{#each resIngredientes}}
+                                    <tr> 
+                                        <td>{{this}}</td>
+                                        <td><input type="checkbox" name="ag-{{this}}"></td>
+                                        <td><input type="checkbox" name="ex-{{this}}"></td>
+                                    </tr>
+                                {{/each}}                             
                             </table>
                         </div>                            
                     </div>
@@ -28,12 +29,15 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-primary floatRight">Volver</button>
+                        <a href="CrearPizzaMain" class="btn btn-primary">
+                            Volver
+                        </a>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-primary floatRight">Seguir</button>
+                        <input type="submit" class="btn btn-primary" name="addToCart" value="Avanzar a la siguiente pizza">
                     </div>
                 </div>
             </div>
-        </div>      
-    </div>
+        </form>
+    </div>		
+</div>

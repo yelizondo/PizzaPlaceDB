@@ -14,9 +14,29 @@ router.get('/', function(req, res, next)
             title: 'Seleccionar Pizza Especial',
             style: 'PizzaEspecialMain.css',
             resSaborizaciones: result.saborizaciones,
-            resTamannosPizza: result.todosLosTamannosPizza
+            resTamannos: result.todosLosTamannosPizza
         });
     });
+});
+
+router.post('/iniciarCreacion', (req, res) => 
+{
+    var bodySaborizacion = req.body.saborizaciones;
+    var bodyTamannos = req.body.tamannos;
+    var bodyCantSabores = req.body.chooseone;
+
+    if (bodyCantSabores === "UnSaborEspecial")
+    {
+        res.redirect('/UnSaborFinal?tamanno='+
+        bodyTamannos +'&saborizacion=' +
+        bodySaborizacion + "&tipoPizza=unSabor");
+    }
+    else
+    {
+        res.redirect('/DosSaboresFinal?tamanno=' +
+        bodyTamannos +'&saborizacion=' +
+        bodySaborizacion + "&tipoPizza=dosSabores");
+    }
 });
 
 module.exports = router;

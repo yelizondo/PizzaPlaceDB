@@ -1,57 +1,68 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">Pizzas Especiales</div>
-        <div class="panel-body">
-            <h1>Ajustar Pizza:</h1>
-            <div class="row">
-                <div class="col-md-4">
-                    <p>Seleccione la pizza que desea:</p>
-                    <form>
-                        <select id="table1">
-                            {{#each resPizzas}}
-                                <option value="{{this}}">{{this}}</option>
-                            {{/each}}                              
-                        </select>
-                    </form>                           
+            <form id="finish" method="POST" action="/UnSaborFinal/finishUnSaborEspecial"></form>
+            <form id="setIngredientes" method="POST" action="/UnSaborFinal/setIngredientes"></form>
+            <div>
+                <div class="panel-body">
+                    <h1>Ajustar Pizza:</h1>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p>Seleccione la pizza que desea:</p>
+                            
+                            <div>
+                                <select form="setIngredientes" id="table1" name="pizzaEspecial">
+                                    {{#each resPizzas}}
+                                        <option value="{{this}}">{{this}}</option>
+                                    {{/each}}                              
+                                </select>
+                                <input form="setIngredientes" type="submit" class="btn btn-primary" name="seguir" value="Seleccionar"> 
+                            </div>                          
+                        </div>
+                        <div class="col-md-4">
+                            <p>Selecione los ingredientes que desea:</p>
+                            <div class="table-responsive">
+                                <table class= "table table-hover table-condensed table-bordered" id="tablePM">
+                                    <tr>
+                                        <th>Ingrediente</th>
+                                        <th>Agregar</th>
+                                        <th>Extra</th>
+                                    </tr>
+                                    {{#each resIngredientes}}
+                                        <tr> 
+                                            <td>{{this.ingrediente}}</td>
+                                            {{#if this.check}}
+                                                <td><input form="finish" type="checkbox" name="ag-{{this.ingrediente}}"checked></td>
+                                            {{else}}
+                                                <td><input form="finish" type="checkbox" name="ag-{{this.ingrediente}}"></td>
+                                            {{/if}}
+                                            
+                                            <td><input form="finish" type="checkbox" name="ex-{{this.ingrediente}}"></td>
+                                        </tr>
+                                    {{/each}}  
+                                </table>
+                            </div>                            
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="cantidad">Cantidad de pizzas:</label>
+                                <input form="finish" type="text" name="CantidadPizzas" class="form-control" id="cantidad" required>
+                            </div>                           
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <p>Selecione los ingredientes que desea:</p>
-                    <div class="table-responsive">
-                        <table class= "table table-hover table-condensed table-bordered" id="tablePM">
-                            <tr>
-                                <th>Ingrediente</th>
-                                <th>Agregar</th>
-                                <th>Extra</th>
-                            </tr>
-                            {{#each resIngredientes}}
-                                <tr> 
-                                    <td>{{this}}</td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                    <td><input type="checkbox" name="check-tab1"></td>
-                                </tr>
-                            {{/each}}  
-                        </table>
-                    </div>                            
+                <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary floatRight">Cancelar Pedido</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary floatRight">Volver</button>
+                    </div>
+                    <div class="col-md-4">
+                        <input form="finish" type="submit" class="btn btn-primary" name="seguir" value="Añadir al carrito"> 
+                    </div> 
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="cantidad">Cantidad de pizzas:</label>
-                        <input type="text" class="form-control" id="cantidad">
-                    </div>                           
-                </div>
-            </div>
-        </div>
-        <div class="panel-footer">
-            <div class="row">
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Cancelar Pedido</button>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Volver</button>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" class="btn btn-primary floatRight">Añadir al Carrito</button>
-                </div> 
             </div>
         </div>
     </div>		

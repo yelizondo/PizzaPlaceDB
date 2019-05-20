@@ -1,7 +1,7 @@
 <div class="container">
     <div class="panel panel-primary">
-        <div class="panel-heading">Pizza Especial</div>
-        <form action="CrearPizzaMain/iniciarCreacion" method='POST'>
+        <div class="panel-heading">Crear Pizza</div>
+        <form action="PizzaEspecialMain/iniciarCreacion" method='POST'>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -18,7 +18,7 @@
                         <p>Selecione el tamaño de la pizza:</p>
                         <div>
                             <select id="table1" name="tamannos">
-                                {{#each resTamannosPizza}}
+                                {{#each resTamannos}}
                                     <option value="{{this}}">{{this}}</option>
                                 {{/each}}
                             </select>
@@ -27,9 +27,9 @@
                     <div class="col-md-4">
                         <div name="radioBox">
                             <p>¿Desea la pizza con dos sabores?</p> 
-                            <input type="radio" name="chooseone" value="UnSabor" checked>
+                            <input type="radio" name="chooseone" value="UnSaborEspecial" checked>
                             <label for="UnSabor"> Un Sabor</label><br> 
-                            <input type="radio" name="chooseone" value="DosSabores">
+                            <input type="radio" name="chooseone" value="DosSaboresEspecial">
                             <label for="DosSabores"> Dos Sabores</label><br>
                         </div>
                     </div>                       

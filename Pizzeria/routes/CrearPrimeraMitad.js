@@ -31,7 +31,7 @@ router.get('/', function(req, res, next)
         ], (result) => {
             res.render('CrearPrimeraMitad', {
                 title: 'Crear Pizza',
-                style: 'CrearPrimeraMitad.css',
+                style: 'styles.css',
                 resIngredientes: result.todosLosIngredientes
             });
         });

@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="panel panel-primary">
+    <div class="panel panel-danger">
         <div class="panel-heading">Crear Pizza - Primera Mitad</div>
         <form method="POST" action="/CrearPrimeraMitad/readyFirst">
             <div class="panel-body">
@@ -15,29 +15,29 @@
                                     <th>Extra</th>
                                 </tr>
                                 {{#each resIngredientes}}
-                                    <tr> 
+                                    <tr>
                                         <td>{{this}}</td>
                                         <td><input type="checkbox" name="ag-{{this}}"></td>
                                         <td><input type="checkbox" name="ex-{{this}}"></td>
                                     </tr>
-                                {{/each}}                             
+                                {{/each}}
                             </table>
-                        </div>                            
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="CrearPizzaMain" class="btn btn-primary">
+                        <a href="CrearPizzaMain" class="btn btn-danger">
                             Volver
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <input type="submit" class="btn btn-primary" name="addToCart" value="Avanzar a la siguiente pizza">
+                        <input type="submit" class="btn btn-danger" name="addToCart" value="Avanzar a la siguiente pizza">
                     </div>
                 </div>
             </div>
         </form>
-    </div>		
+    </div>
 </div>

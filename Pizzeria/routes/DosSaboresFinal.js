@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
         pizzaEnConstruccion = JSON.parse(req.query.order);
         res.render('DosSaboresFinal', {
             title: 'Crear Pizza',
-            style: 'DosSaboresFinal.css'
+            style: 'styles.css'
         });
     }
 });

@@ -21,7 +21,7 @@ router.get('/', function(req, res, next)
         ], (result) => {
             res.render('CrearPizzaMain', {
                 title: 'Crear Pizza',
-                style: 'CrearPizzaMain.css',
+                style: 'styles.css',
                 resSaborizaciones: result.saborizaciones,
                 resTamannos: result.todosLosTamannosPizza
             });

@@ -30,7 +30,7 @@ router.get('/', function(req, res, next)
         ], (result) => {
             res.render('CrearSegundaMitad', {
                 title: 'Crear Pizza',
-                style: 'CrearSegundaMitad.css',
+                style: 'styles.css',
                 resIngredientes: result.todosLosIngredientes
             });
         });

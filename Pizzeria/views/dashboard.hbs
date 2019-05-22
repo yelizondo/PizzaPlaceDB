@@ -1,41 +1,41 @@
 <div class="container">
-  <div class="panel panel-primary">
+  <div class="panel panel-danger">
     <div class="panel-heading">Seleccione lo que desea añadir a la orden</div>
     <div class="panel-body">
       <div class="row">
         <div class="col-md-4">
           <div class="row">
-            <div class="col-md-4"> 
-              <a href="CrearPizzaMain" class="btn btn-primary">
+            <div class="col-md-4">
+              <a href="CrearPizzaMain" class="btn btn-danger dashboard-btn">
                   Crear Pizza
-              </a>       
-            </div>                  
+              </a>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-4">
-                <a href="PizzaEspecialMain" class="btn btn-primary">
+                <a href="PizzaEspecialMain" class="btn btn-danger dashboard-btn">
                     Pizza Especial
-                </a>                           
-            </div>                  
+                </a>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-4">
-                <a href="Ensalada" class="btn btn-primary">
+                <a href="Ensalada" class="btn btn-danger dashboard-btn">
                     Ensalada
-                </a>                           
-            </div>                  
+                </a>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-4">
-                <a href="Bebida" class="btn btn-primary">
+                <a href="Bebida" class="btn btn-danger dashboard-btn">
                   Bebida
-                </a>                            
-            </div>                  
+                </a>
+            </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="table-responsive">
-            <table class="table table-hover table-bordered table-condensed" id="Table">
+            <table class="table table-hover table-bordered table-condensed">
               <tr>
                 <th>Elemento</th>
                 <th>Tamaño</th>
@@ -51,32 +51,32 @@
                 <td>12000</td>
               </tr>
               {{#each resOrden}}
-                  <tr> 
+                  <tr>
                       <td>{{this.elemento}}</td>
                       <td>{{this.tamanno}}</td>
                       <td>{{this.cantidad}}</td>
                       <td>{{this.extras}}</td>
                       <td>{{this.precio}}</td>
                   </tr>
-              {{/each}}                                   
-            </table>                  
+              {{/each}}
+            </table>
           </div>
-        </div>              
-      </div>                                                            
+        </div>
+      </div>
     </div>
     <div class="panel-footer">
       <div class="row">
         <div class="col-md-4">
-            <a href="/login/logout" class="btn btn-primary">
+            <a href="/login/logout" class="btn btn-danger pull-right">
               Salir
-            </a> 
+            </a>
         </div>
         <div class="col-md-4">
-            <a href="Bebida" class="btn btn-primary">
+            <a href="Bebida" class="btn btn-danger pull-right">
               Realizar Pedido
-            </a> 
+            </a>
         </div>
       </div>
     </div>
-  </div>    
+  </div>
 </div>

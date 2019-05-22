@@ -49,7 +49,7 @@ router.get('/', function(req, res, next)
 
                 res.render('UnSaborFinal', {
                     title: 'Seleccionar Pizza',
-                    style: 'UnSaborFinal.css',
+                    style: 'styles.css',
                     resPizzas: result.todasLasPizzas,
                     resIngredientes:allIng
                 });
@@ -83,7 +83,7 @@ router.get('/', function(req, res, next)
 
                     res.render('UnSaborFinal', {
                         title: 'Seleccionar Pizza',
-                        style: 'UnSaborFinal.css',
+                        style: 'styles.css',
                         resPizzas: result.todasLasPizzas,
                         resIngredientes: allIng,
                         resObj: true

@@ -1,3 +1,9 @@
+body {
+    background: url("/images/pizza.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 /* Remove the navbar's default rounded borders and increase the bottom margin */
 .navbar {
   margin-bottom: 50px;

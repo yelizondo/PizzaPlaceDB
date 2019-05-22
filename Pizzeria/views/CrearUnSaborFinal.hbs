@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="panel panel-primary">
+    <div class="panel panel-danger">
         <div class="panel-heading">Crear</div>
         <form method="POST" action="/CrearUnSaborFinal/finalizarUnSabor">
             <div class="panel-body">
@@ -15,40 +15,40 @@
                                     <th>Extra</th>
                                 </tr>
                                 {{#each resIngredientes}}
-                                    <tr name="ingrediente"> 
+                                    <tr name="ingrediente">
                                         <td>{{this}}</td>
                                         <td><input type="checkbox" name="ag-{{this}}"></td>
                                         <td><input type="checkbox" name="ex-{{this}}"></td>
                                     </tr>
-                                {{/each}}                             
+                                {{/each}}
                             </table>
-                        </div>                            
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="cantidad">Cantidad de pizzas:</label>
                             <input name="cantidad" type="text" class="form-control" id="cantidad" required>
-                        </div>                           
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="dashboard" class="btn btn-primary">
+                        <a href="dashboard" class="btn btn-danger">
                             Cancelar Pedido
-                        </a> 
+                        </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="CrearPizzaMain" class="btn btn-primary">
+                        <a href="CrearPizzaMain" class="btn btn-danger">
                             Volver
-                        </a> 
+                        </a>
                     </div>
                     <div class="col-md-4">
-                        <input type="submit" class="btn btn-primary" name="addToCart" value="Añadir al carrito"> 
-                    </div> 
+                        <input type="submit" class="btn btn-danger" name="addToCart" value="Añadir al carrito"> 
+                    </div>
                 </div>
             </div>
         </form>
-    </div>		
+    </div>
 </div>

@@ -19,7 +19,7 @@ router.get('/', function(req, res, next)
         ], (result) => {
             res.render('PizzaEspecialMain', {
                 title: 'Seleccionar Pizza Especial',
-                style: 'PizzaEspecialMain.css',
+                style: 'styles.css',
                 resSaborizaciones: result.saborizaciones,
                 resTamannos: result.todosLosTamannosPizza
             });

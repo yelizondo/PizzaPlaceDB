@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
         ], (result) => {
             res.render('CrearUnSaborFinal', {
                 title: 'Crear Pizza',
-                style: 'CrearUnSaborFinal.css',
+                style: 'styles.css',
                 resIngredientes: result.todosLosIngredientes
             });
         });

@@ -59,7 +59,7 @@ router.get('/', function(req, res, next)
                 // Then render the page with those ingredients
                 res.render('SegundaMitad', {
                     title: 'Seleccionar Segunda Mitad',
-                    style: 'SegundaMitad.css',
+                    style: 'styles.css',
                     resPizzas: result.todasLasPizzas,
                     resIngredientes: allIng
                 });
@@ -99,7 +99,7 @@ router.get('/', function(req, res, next)
                     // Render the page with the new ingredients
                     res.render('SegundaMitad', {
                         title: 'Seleccionar Segunda Mitad',
-                        style: 'SegundaMitad.css',
+                        style: 'styles.css',
                         resPizzas: result.todasLasPizzas,
                         resIngredientes: allIng,
                         resObj: true

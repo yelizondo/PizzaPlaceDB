@@ -24,7 +24,7 @@ router.get('/', function(req, res, next)
         ], (result) => {
             res.render('Bebida', {
                 title: 'Seleccionar Bebida',
-                style: 'Bebida.css',
+                style: 'styles.css',
                 resBebidas: result.todasLasBebidas,
                 resTamannoBebidas: result.todosLosTamannosBebida
             });

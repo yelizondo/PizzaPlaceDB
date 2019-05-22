@@ -26,7 +26,7 @@ router.get('/', function(req, res, next)
         ], (result) => {
             res.render('Ensalada', {
                 title: 'Seleccionar Ensalada',
-                style: 'Ensalada.css',
+                style: 'styles.css',
                 resEnsaladas: result.todasLasEnsaladas,
                 resTamannosEnsalada: result.todosLostamannosEnsalada,
                 resVinagretas: result.todasLasVinagretas,

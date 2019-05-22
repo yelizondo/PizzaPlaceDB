@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="panel panel-primary">
+    <div class="panel panel-danger">
         <div class="panel-heading">Pizzas Especiales</div>
             <form id="finish" method="POST" action="/PrimeraMitad/finishPrimerSaborEspecial"></form>
             <form id="setIngredientes" method="POST" action="/PrimeraMitad/setIngredientes"></form>
@@ -11,12 +11,12 @@
                             <p>Seleccione la pizza que desea:</p>
 
                             <div>
-                                <select form="setIngredientes" id="table1" name="pizzaEspecial">
+                                <select class="select-css" form="setIngredientes" id="table1" name="pizzaEspecial">
                                     {{#each resPizzas}}
                                         <option value="{{this}}">{{this}}</option>
                                     {{/each}}
                                 </select>
-                                <input form="setIngredientes" type="submit" class="btn btn-primary" name="seguir" value="Seleccionar">
+                                <input form="setIngredientes" type="submit" class="btn btn-danger" name="seguir" value="Seleccionar">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -48,12 +48,12 @@
                 <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="/dashboard" class="btn btn-primary floatRight">
+                        <a href="/dashboard" class="btn btn-danger floatRight">
                           Cancelar Pedido
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <input form="finish" type="submit" class="btn btn-primary" name="seguir" value="Siguiente Mitad">
+                        <input form="finish" type="submit" class="btn btn-danger" name="seguir" value="Siguiente Mitad">
                     </div>
                 </div>
             </div>

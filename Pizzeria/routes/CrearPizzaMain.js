@@ -36,19 +36,19 @@ router.post('/iniciarCreacion', (req, res) =>
     var bodyCantSabores = req.body.chooseone;
     var orderType;
 
-    if (bodyCantSabores === "UnSabor")
+    if (bodyCantSabores === 'UnSabor')
     {
-        orderType = "UnSabor";
+        orderType = 'UnSabor';
         res.redirect('/CrearUnSaborFinal?tamanno='+ bodyTamannos +
         '&saborizacion=' + bodySaborizacion +
-        "&tipoPizza=" + orderType);
+        '&tipoOrden=' + orderType);
     }
     else
     {
-        orderType = "DosSabores";
-        res.redirect('/CrearPrimeraMitad?tamanno=' +bodyTamannos +
+        orderType = 'DosSabores';
+        res.redirect('/CrearPrimeraMitad?tamanno=' + bodyTamannos +
         '&saborizacion=' + bodySaborizacion +
-        "&tipoPizza=" + orderType);
+        '&tipoOrden=' + orderType);
     }
 });
 

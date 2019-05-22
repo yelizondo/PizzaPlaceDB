@@ -33,18 +33,18 @@ router.post('/iniciarCreacion', (req, res) =>
     var bodyTamannos = req.body.tamannos;
     var bodyCantSabores = req.body.chooseone;
 
-    if (bodyCantSabores === "UnSaborEspecial")
+    if (bodyCantSabores === 'UnSaborEspecial')
     {
         res.redirect('/UnSaborFinal?tamanno=' + bodyTamannos +
         '&saborizacion=' + bodySaborizacion +
-        "&tipoPizza="+bodyCantSabores);
+        '&tipoOrden=UnSabor');
     }
     else
     {
         res.redirect('/PrimeraMitad?tamanno=' + bodyTamannos +
         '&saborizacion=' +bodySaborizacion +
-        "&tipoPizza="+bodyCantSabores);
-    }
+        '&tipoOrden=' + bodyCantSabores);
+    }1
 });
 
 module.exports = router;

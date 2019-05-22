@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
     {
         pizzaEnConstruccion.tamanno = req.query.tamanno;
         pizzaEnConstruccion.saborizacion = req.query.saborizacion;
-        pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+        pizzaEnConstruccion.tipoOrden = req.query.tipoOrden;
 
         // Query todas las saborizaciones
         dtCPM.getStoredProcs([
@@ -36,10 +36,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/finalizarUnSabor', (req, res, next) => {
-    pizzaEnConstruccion.cantidad = req.body.cantidad;
 
     var listIng = [];
-
 
     for (var key in req.body)
     {
@@ -55,7 +53,6 @@ router.post('/finalizarUnSabor', (req, res, next) => {
             }
             else if (key[0] === 'e')
             {
-
                 let obj = listIng.find((o, i) =>
                 {
                     if (o.name === cleanIng(key))
@@ -66,7 +63,8 @@ router.post('/finalizarUnSabor', (req, res, next) => {
             }
         }
     }
-
+    pizzaEnConstruccion.tipo = 'Pizza Personalizada';
+    pizzaEnConstruccion.cantidad = req.body.cantidad;
     pizzaEnConstruccion.ingredientes = listIng;
 
     var info = "?order=" + JSON.stringify(pizzaEnConstruccion);

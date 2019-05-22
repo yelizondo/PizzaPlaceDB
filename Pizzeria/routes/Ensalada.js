@@ -7,7 +7,7 @@ var ensaladaEnConstruccion = {};
 
 function cleanIng(ing)
 {
-    return ing.split('-',2)[1];
+    return ing.split('-', 2)[1];
 }
 
 router.get('/', function(req, res, next)
@@ -65,17 +65,18 @@ router.post('/iniciarCreacion', (req, res, next) =>
         }
     }
 
+    ensaladaEnConstruccion.tipoOrden = 'ensalada';
     ensaladaEnConstruccion.tipo = req.body.ensalada;
     ensaladaEnConstruccion.tamanno = req.body.tamanno;
     ensaladaEnConstruccion.vinagreta = req.body.vinagreta;
     if(req.body.pollo){
-        ensaladaEnConstruccion.pollo = true;
+        ensaladaEnConstruccion.pollo = 'Pollo';
     }else{
-        ensaladaEnConstruccion.pollo = false;
+        ensaladaEnConstruccion.pollo = '';
     }
     ensaladaEnConstruccion.cantidad = req.body.cantidad;
     ensaladaEnConstruccion.ingredientes = listIng;
-    var info = "?order=" + JSON.stringify(ensaladaEnConstruccion) + "&tipoOrden=ensalada";
+    var info = "?order=" + JSON.stringify(ensaladaEnConstruccion);
 
     res.redirect('/dashboard/addToCart' + info);
 });

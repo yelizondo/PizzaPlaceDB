@@ -40,21 +40,16 @@
                 <th>Elemento</th>
                 <th>Tamaño</th>
                 <th>Cantidad</th>
+                <th>Detalles</th>
                 <th>Extras</th>
                 <th>Precio</th>
-              </tr>
-              <tr>
-                <td>BLT</td>
-                <td>Grande</td>
-                <td>1</td>
-                <td>Ninguno</td>
-                <td>12000</td>
               </tr>
               {{#each resOrden}}
                   <tr> 
                       <td>{{this.elemento}}</td>
                       <td>{{this.tamanno}}</td>
                       <td>{{this.cantidad}}</td>
+                      <td>{{this.detalles}}</td>
                       <td>{{this.extras}}</td>
                       <td>{{this.precio}}</td>
                   </tr>

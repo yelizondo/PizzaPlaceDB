@@ -3,6 +3,13 @@ var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
 var dtCPM = require('../public/javascripts/querier.js');
 
+var bebidaEnConstruccion = {};
+
+function cleanIng(ing)
+{
+    return ing.split('-',2)[1];
+}
+
 router.get('/', function(req, res, next)
 {
     if (!req.session.loggedIn)
@@ -11,7 +18,6 @@ router.get('/', function(req, res, next)
     }
     else
     {
-        // Query todas las saborizaciones
         dtCPM.getStoredProcs([
             [dbcon.todasLasBebidas,"Descripcion"],
             [dbcon.todosLosTamannosBebida, "Descripcion"]
@@ -26,15 +32,16 @@ router.get('/', function(req, res, next)
     }
 });
 
-router.post('/iniciarCreacion', (req, res) =>
+router.post('/iniciarCreacion', (req, res, next) =>
 {
-    var bodyBebida = req.body.bebida;
-    var bodyTamanno = req.body.tamanno;
-    var bodyCantBebidas = req.body.cantidad;
+    bebidaEnConstruccion.tipoOrden = 'bebida';
+    bebidaEnConstruccion.tipo = req.body.bebida;
+    bebidaEnConstruccion.tamanno = req.body.tamanno;
+    bebidaEnConstruccion.cantidad = req.body.cantidad;
 
-    var items = '?bebida=' + bodyBebida + '&tamanno=' + bodyTamanno + '&cantidad=' + bodyCantBebidas + "&tipoOrden=bebida";
+    var info = "?order=" + JSON.stringify(bebidaEnConstruccion);
 
-    res.redirect('/dashboard/addToCart' + items);
+    res.redirect('/dashboard/addToCart' + info);
 });
 
 module.exports = router;

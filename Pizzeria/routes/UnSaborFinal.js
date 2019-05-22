@@ -23,7 +23,7 @@ router.get('/', function(req, res, next)
         {
             pizzaEnConstruccion.tamanno = req.query.tamanno;
             pizzaEnConstruccion.saborizacion = req.query.saborizacion;
-            pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+            pizzaEnConstruccion.tipoOrden = req.query.tipoOrden;
         }
 
         dtCPM.getStoredProcs([
@@ -31,7 +31,7 @@ router.get('/', function(req, res, next)
             [dbcon.todosLosIngredientes, "DESCRIPCION"]
         ], (result) => {
 
-            if (pizzaEnConstruccion.name === "")
+            if (pizzaEnConstruccion.tipo === "")
             {
                 var ipx = [];
 
@@ -56,7 +56,7 @@ router.get('/', function(req, res, next)
             }
             else
             {
-                dbcon.ingredientesPorPizza(pizzaEnConstruccion.name, (recordset) =>
+                dbcon.ingredientesPorPizza(pizzaEnConstruccion.tipo, (recordset) =>
                 {
                     var ixp = [];
 
@@ -97,7 +97,7 @@ router.get('/', function(req, res, next)
 
 router.post('/setIngredientes', (req, res, next) => {
 
-    pizzaEnConstruccion.name = req.body.pizzaEspecial;
+    pizzaEnConstruccion.tipo = req.body.pizzaEspecial;
 
     res.redirect('/UnSaborFinal');
 });

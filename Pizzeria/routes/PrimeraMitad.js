@@ -23,7 +23,7 @@ router.get('/', function(req, res, next)
         {
             pizzaEnConstruccion.tamanno = req.query.tamanno;
             pizzaEnConstruccion.saborizacion = req.query.saborizacion;
-            pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+            pizzaEnConstruccion.tipoOrden = req.query.tipoOrden;
         }
 
         dtCPM.getStoredProcs([

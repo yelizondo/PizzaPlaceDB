@@ -23,7 +23,7 @@ router.get('/', function(req, res, next)
         {
             pizzaEnConstruccion.tamanno = req.query.tamanno;
             pizzaEnConstruccion.saborizacion = req.query.saborizacion;
-            pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+            pizzaEnConstruccion.tipoOrden = req.query.tipoOrden;
         }
 
         dtCPM.getStoredProcs([
@@ -71,6 +71,7 @@ router.post('/readyFirst', (req, res, next) => {
         }
     }
 
+    pizzaEnConstruccion.tipo = 'Pizza Personalizada';
     pizzaEnConstruccion.ingredientesP1 = listIng;
 
     res.redirect('/CrearSegundaMitad?order=' + JSON.stringify(pizzaEnConstruccion));

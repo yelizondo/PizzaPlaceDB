@@ -23,7 +23,7 @@ router.get('/', (req, res, next) => {
 router.post('/addQuantity', (req, res) => {
     pizzaEnConstruccion.cantidad = req.body.cantidad;
 
-    var info = "?order=" + JSON.stringify(pizzaEnConstruccion);
+    var info = '?order=' + JSON.stringify(pizzaEnConstruccion);
 
     res.redirect('/dashboard/addToCart' + info);
 });

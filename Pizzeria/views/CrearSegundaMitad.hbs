@@ -3,7 +3,7 @@
         <div class="panel-heading">Crear Pizza - Segunda Mitad</div>
         <form method="POST" action="/CrearSegundaMitad/readySecond">
             <div class="panel-body">
-                <h1>Crear la primera mitad de la pizza:</h1>
+                <h1>Crear la segunda mitad de la pizza:</h1>
                 <div class="row">
                     <div class="col-md-4">
                         <p>Selecione los ingredientes que desea:</p>
@@ -15,14 +15,14 @@
                                     <th>Extra</th>
                                 </tr>
                                 {{#each resIngredientes}}
-                                    <tr> 
+                                    <tr>
                                         <td>{{this}}</td>
                                         <td><input type="checkbox" name="ag-{{this}}"></td>
                                         <td><input type="checkbox" name="ex-{{this}}"></td>
                                     </tr>
-                                {{/each}}                             
+                                {{/each}}
                             </table>
-                        </div>                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,10 +34,10 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <input type="submit" class="btn btn-primary" name="addToCart" value="Avanzar a la siguiente pizza">
+                        <input type="submit" class="btn btn-primary" name="addToCart" value="Avanzar">
                     </div>
                 </div>
             </div>
         </form>
-    </div>		
+    </div>
 </div>

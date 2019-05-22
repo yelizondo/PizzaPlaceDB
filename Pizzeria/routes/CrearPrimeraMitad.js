@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
@@ -5,16 +6,20 @@ var dtCPM = require('../public/javascripts/querier.js');
 
 var pizzaEnConstruccion = {};
 
-function cleanIng(ing) 
+function cleanIng(ing)
 {
     return ing.split('-',2)[1];
 }
 
-router.get('/', function(req, res, next) 
+router.get('/', function(req, res, next)
 {
-    pizzaEnConstruccion.tamanno = req.query.tamanno;
-    pizzaEnConstruccion.saborizacion = req.query.saborizacion;
-    pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+
+    if (Object.entries(pizzaEnConstruccion).length === 0 && pizzaEnConstruccion.constructor === Object)
+    {
+        pizzaEnConstruccion.tamanno = req.query.tamanno;
+        pizzaEnConstruccion.saborizacion = req.query.saborizacion;
+        pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+    }
 
     dtCPM.getStoredProcs([
         [dbcon.todosLosIngredientes, "DESCRIPCION"]
@@ -34,11 +39,11 @@ router.post('/readyFirst', (req, res, next) => {
 
     var listIng = [];
 
-    for (var key in req.body) 
+    for (var key in req.body)
     {
         var ing = {};
 
-        if (key !== 'cantidad' && key !== 'addToCart') 
+        if (key !== 'cantidad' && key !== 'addToCart')
         {
             if (key[0] === 'a')
             {
@@ -49,9 +54,9 @@ router.post('/readyFirst', (req, res, next) => {
             else if (key[0] === 'e')
             {
 
-                let obj = listIng.find((o, i) => 
+                let obj = listIng.find((o, i) =>
                 {
-                    if (o.name === cleanIng(key)) 
+                    if (o.name === cleanIng(key))
                     {
                         listIng[i] = { name: cleanIng(key), extra: true };
                     }
@@ -60,7 +65,7 @@ router.post('/readyFirst', (req, res, next) => {
         }
     }
 
-    pizzaEnConstruccion.ingredientesP1 = listIng; 
+    pizzaEnConstruccion.ingredientesP1 = listIng;
 
     res.redirect('/CrearSegundaMitad?order=' + JSON.stringify(pizzaEnConstruccion));
 });

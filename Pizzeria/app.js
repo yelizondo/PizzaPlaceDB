@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // Dependecies requires
 var createError = require('http-errors');
 var express = require('express');
@@ -24,6 +25,7 @@ var PizzaEspecialMain = require('./routes/PizzaEspecialMain');
 var PrimeraMitad = require('./routes/PrimeraMitad');
 var SegundaMitad = require('./routes/SegundaMitad');
 var UnSaborFinal = require('./routes/UnSaborFinal');
+var Mantenimiento = require('./routes/Mantenimiento');
 
 var app = express();
 
@@ -60,6 +62,7 @@ app.use('/PizzaEspecialMain', PizzaEspecialMain);
 app.use('/PrimeraMitad', PrimeraMitad);
 app.use('/SegundaMitad', SegundaMitad);
 app.use('/UnSaborFinal', UnSaborFinal);
+app.use('/Mantenimiento', Mantenimiento);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

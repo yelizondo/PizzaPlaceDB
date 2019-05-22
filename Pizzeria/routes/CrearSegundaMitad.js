@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
@@ -12,9 +13,9 @@ function cleanIng(ing)
 
 router.get('/', function(req, res, next)
 {
-    if (pizzaEnConstruccion = JSON.parse(req.query.order))
+    if (Object.entries(pizzaEnConstruccion).length === 0 && pizzaEnConstruccion.constructor === Object)
     {
-      pizzaEnConstruccion = JSON.parse(req.query.order);
+        pizzaEnConstruccion = JSON.parse(req.query.order);
     }
 
     // Query todas las saborizaciones

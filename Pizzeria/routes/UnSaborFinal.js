@@ -13,9 +13,12 @@ function cleanIng(ing)
 
 router.get('/', function(req, res, next)
 {
-    pizzaEnConstruccion.tamanno = req.query.tamanno;
-    pizzaEnConstruccion.saborizacion = req.query.saborizacion;
-    pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+    if (Object.entries(pizzaEnConstruccion).length === 0 && pizzaEnConstruccion.constructor === Object)
+    {
+        pizzaEnConstruccion.tamanno = req.query.tamanno;
+        pizzaEnConstruccion.saborizacion = req.query.saborizacion;
+        pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+    }
 
     dtCPM.getStoredProcs([
         [dbcon.todasLasPizzas,"Descripcion"],
@@ -86,7 +89,6 @@ router.get('/', function(req, res, next)
 });
 
 router.post('/setIngredientes', (req, res, next) => {
-    nombrePizza = req.body.pizzaEspecial;
 
     pizzaEnConstruccion.name = req.body.pizzaEspecial;
 

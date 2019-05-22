@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
@@ -6,7 +7,7 @@ var dtCPM = require('../public/javascripts/querier.js');
 var saborizaciones = ["Escoger la saborizacion"];
 var tamannosPizza = ["Escoger el tamaño"];
 
-router.get('/', function(req, res, next) 
+router.get('/', function(req, res, next)
 {
     dtCPM.getStoredProcs([
         [dbcon.todasLasSaborizaciones,"DESCRIPCION"],
@@ -21,23 +22,26 @@ router.get('/', function(req, res, next)
     });
 });
 
-router.post('/iniciarCreacion', (req, res) => 
+router.post('/iniciarCreacion', (req, res) =>
 {
     var bodySaborizacion = req.body.saborizaciones;
     var bodyTamannos = req.body.tamannos;
     var bodyCantSabores = req.body.chooseone;
+    var orderType;
 
     if (bodyCantSabores === "UnSabor")
     {
-        res.redirect('/CrearUnSaborFinal?tamanno='+
-        bodyTamannos +'&saborizacion=' +
-        bodySaborizacion + "&tipoOrden=unSabor");
+        orderType = "UnSabor";
+        res.redirect('/CrearUnSaborFinal?tamanno='+ bodyTamannos +
+        '&saborizacion=' + bodySaborizacion +
+        "&tipoPizza=" + orderType);
     }
     else
     {
-        res.redirect('/CrearPrimeraMitad?tamanno=' +
-        bodyTamannos +'&saborizacion=' +
-        bodySaborizacion + "&tipoPizza=dosSabores");
+        orderType = "DosSabores";
+        res.redirect('/CrearPrimeraMitad?tamanno=' +bodyTamannos +
+        '&saborizacion=' + bodySaborizacion +
+        "&tipoPizza=" + orderType);
     }
 });
 

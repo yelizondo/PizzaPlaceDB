@@ -1,10 +1,10 @@
 var sql = require("mssql");
 
 var dbConfig = {
-	server: "db1itcr.database.windows.net",
+	server: "pizzeria.cxgruvuhjzdc.us-east-2.rds.amazonaws.com",
 	database: "Pizzeria",
-	user: "Administrador",
-	password: "Abcd1234",
+	user: "Admininistrador",
+	password: "Holamundo1234",
 	port: 1433,
 	encrypt: true
 };
@@ -16,9 +16,9 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
@@ -32,16 +32,16 @@ module.exports = {
 			request.output('Result', sql.Int)
 
 			request.execute('SP_CrearNuevoCliente', function (err, recordset, returnValue) {
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					callback(recordset['returnValue']);
 				}
 				connection.close();
-			});	
+			});
 		})
 	},
 
@@ -50,31 +50,31 @@ module.exports = {
 		var connection = new sql.ConnectionPool(dbConfig);
 		var result = false;
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
 				return;
 			}
-	
+
 			request.input('Email', sql.VarChar(50), pMail)
 			request.output('Result',sql.Int)
-			
-			request.execute('SP_DoesClientExist', function (err, recordset, returnValue) 
+
+			request.execute('SP_DoesClientExist', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					callback(recordset['returnValue']);
 				}
 				connection.close();
 			});
-	
+
 		})
 		return result;
 	},
@@ -83,22 +83,22 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error! tamannos pizza");
 				//console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodosLosTamañosDePizza', function (err, recordset, returnValue) 
+			request.execute('SP_TodosLosTamañosDePizza', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'todosLosTamannosPizza';
 					callback(recordset);
@@ -112,22 +112,22 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodasLasPizzas', function (err, recordset, returnValue) 
+			request.execute('SP_TodasLasPizzas', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'todasLasPizzas';
 					callback(recordset);
@@ -141,22 +141,22 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodasLasEnsaladas', function (err, recordset, returnValue) 
+			request.execute('SP_TodasLasEnsaladas', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'todasLasEnsaladas';
 					callback(recordset);
@@ -170,22 +170,22 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodasLasBebidas', function (err, recordset, returnValue) 
+			request.execute('SP_TodasLasBebidas', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'todasLasBebidas';
 					callback(recordset);
@@ -199,22 +199,22 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodosLosIngredientes', function (err, recordset, returnValue) 
+			request.execute('SP_TodosLosIngredientes', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'todosLosIngredientes';
 					callback(recordset);
@@ -228,22 +228,22 @@ module.exports = {
 	{
 		var conn = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(conn);
-		conn.connect (function (err) 
+		conn.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error! saborizaciones");
 				console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodasLasSaborizaciones', function (err, recordset, returnValue) 
+			request.execute('SP_TodasLasSaborizaciones', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'saborizaciones';
 					callback(recordset);
@@ -257,9 +257,9 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
@@ -268,13 +268,13 @@ module.exports = {
 
 			request.input('PizzaName', sql.VarChar(50), pPizza);
 
-			request.execute('SP_IngredientesPorPizza', function (err, recordset, returnValue) 
+			request.execute('SP_IngredientesPorPizza', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'ingredientesPorPizza';
 					callback(recordset);
@@ -288,22 +288,22 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodosLosTamañosDeEnsalada', function (err, recordset, returnValue) 
+			request.execute('SP_TodosLosTamañosDeEnsalada', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'todosLostamannosEnsalada';
 					callback(recordset);
@@ -317,22 +317,22 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodosLosTamañosDeBebida', function (err, recordset, returnValue) 
+			request.execute('SP_TodosLosTamañosDeBebida', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'todosLosTamannosBebida';
 					callback(recordset);
@@ -346,22 +346,22 @@ module.exports = {
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
-		connection.connect (function (err) 
+		connection.connect (function (err)
 		{
-			if (err) 
+			if (err)
 			{
 				console.log("Found error!");
 				console.log(err);
 				return;
 			}
 
-			request.execute('SP_TodasLasVinagretas', function (err, recordset, returnValue) 
+			request.execute('SP_TodasLasVinagretas', function (err, recordset, returnValue)
 			{
-				if (err) 
+				if (err)
 				{
 					console.log(err);
 				}
-				else 
+				else
 				{
 					recordset.spName = 'todasLasVinagretas';
 					callback(recordset);

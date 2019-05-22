@@ -13,53 +13,69 @@ function cleanIng(ing)
 
 router.get('/', function(req, res, next)
 {
-    if (Object.entries(obj).length === 0 && obj.constructor === Object)
-    { console.log(JSON.parse(req.query.order));
-      pizzaEnConstruccion = JSON.parse(req.query.order);
+    // Load the first part of the pizza to out global pizza variable
+    if (Object.entries(pizzaEnConstruccion).length === 0 && pizzaEnConstruccion.constructor === Object)
+    {
+        pizzaEnConstruccion = JSON.parse(req.query.order);
     }
 
-
+    // Call the database
     dtCPM.getStoredProcs([
-        [dbcon.todasLasPizzas,"Descripcion"],
-        [dbcon.todosLosIngredientes, "DESCRIPCION"]
+      [dbcon.todasLasPizzas,"Descripcion"],
+      [dbcon.todosLosIngredientes, "DESCRIPCION"]
     ], (result) => {
 
+        /* Check if the pizza name exists,
+        * if not, then just load the ingredientes
+        * else, load the ingredientes and select those specific to the pizza selected
+        */
         if (pizzaEnConstruccion.name2 === "" || pizzaEnConstruccion.name2 == null)
         {
+            // Ingredients var
             var ipx = [];
 
+            // Get the ingredientes from the database result
             for (var i = 0; i < result.todosLosIngredientes.length; i++ )
             {
                 ipx.push(result.todosLosIngredientes[i])
             }
 
+            // Variable for the result Ingredients
+            // It will contain objects {ingrediente: 'name', check: 'false'}
             var allIng = [];
 
+            // Create all the objects
             for (let i = 0; i < ipx.length; i++)
             {
                 allIng.push({ingrediente: ipx[i], check: false});
             }
 
+            // Then render the page with those ingredients
             res.render('SegundaMitad', {
                 title: 'Seleccionar Segunda Mitad',
                 style: 'SegundaMitad.css',
                 resPizzas: result.todasLasPizzas,
-                resIngredientes:allIng
+                resIngredientes: allIng
             });
         }
         else
         {
+            // Get all the ingredients for the given pizza from de db
             dbcon.ingredientesPorPizza(pizzaEnConstruccion.name2, (recordset) =>
             {
+                // Ingredients for that specific pizza
                 var ixp = [];
 
+                // Get all the ingrediets from the db result
                 for (var i = 0; i < recordset.recordset.length; i++ )
                 {
                     ixp.push(recordset.recordset[i].Descripcion)
                 }
 
+                // Var for the result object ingredients
                 var allIng = [];
 
+                // Get the ingredients to check
                 for (let i = 0; i < result.todosLosIngredientes.length; i++)
                 {
                   var obj = {};
@@ -74,6 +90,7 @@ router.get('/', function(req, res, next)
                     allIng.push(obj);
                 }
 
+                // Render the page with the new ingredients
                 res.render('SegundaMitad', {
                     title: 'Seleccionar Segunda Mitad',
                     style: 'SegundaMitad.css',
@@ -84,7 +101,10 @@ router.get('/', function(req, res, next)
 
             });
         }
-    });
+
+
+
+  });
 });
 
 router.post('/setIngredientes', (req, res, next) => {

@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Crear Nueva Pizza Especial</div>
+        <form id="nuevaPizzaEspecial" action="#" method="POST"></form>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="Nombre">Digite el nuevo nombre:</label>
+                    <br>
+                    <input type="text" id="Nombre" name="Nombre" placeholder="Nombre" required>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <div class="table-responsive">
+                        <table class= "table table-hover table-condensed table-bordered" id="tablePM">
+                            <tr>
+                                <th>Ingrediente</th>
+                                <th>Agregar</th>
+                            </tr>
+                            {{#each resIngredientes}}
+                                <tr name="ingrediente">
+                                    <td>{{this}}</td>
+                                    <td><input type="checkbox" name="{{this}}"></td>
+                                </tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-md-4">
+                    <input form="nuevaPizzaEspecial" type="submit" class="btn btn-primary" name="Add" value="Add">
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-primary" href="login">Salir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

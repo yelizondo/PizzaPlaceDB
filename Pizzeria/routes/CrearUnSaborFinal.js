@@ -12,20 +12,27 @@ function cleanIng(ing)
 }
 
 router.get('/', function(req, res, next) {
-    pizzaEnConstruccion.tamanno = req.query.tamanno;
-    pizzaEnConstruccion.saborizacion = req.query.saborizacion;
-    pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+    if (!req.session.loggedIn)
+    {
+        res.redirect('/login');
+    }
+    else
+    {
+        pizzaEnConstruccion.tamanno = req.query.tamanno;
+        pizzaEnConstruccion.saborizacion = req.query.saborizacion;
+        pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
 
-    // Query todas las saborizaciones
-    dtCPM.getStoredProcs([
-        [dbcon.todosLosIngredientes, "DESCRIPCION"]
-    ], (result) => {
-        res.render('CrearUnSaborFinal', {
-            title: 'Crear Pizza',
-            style: 'CrearUnSaborFinal.css',
-            resIngredientes: result.todosLosIngredientes
+        // Query todas las saborizaciones
+        dtCPM.getStoredProcs([
+            [dbcon.todosLosIngredientes, "DESCRIPCION"]
+        ], (result) => {
+            res.render('CrearUnSaborFinal', {
+                title: 'Crear Pizza',
+                style: 'CrearUnSaborFinal.css',
+                resIngredientes: result.todosLosIngredientes
+            });
         });
-    });
+    }
 });
 
 router.post('/finalizarUnSabor', (req, res, next) => {

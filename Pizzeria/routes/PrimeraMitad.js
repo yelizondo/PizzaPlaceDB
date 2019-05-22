@@ -13,79 +13,86 @@ function cleanIng(ing)
 
 router.get('/', function(req, res, next)
 {
-    if (Object.entries(pizzaEnConstruccion).length === 0 && pizzaEnConstruccion.constructor === Object)
+    if (!req.session.loggedIn)
     {
-        pizzaEnConstruccion.tamanno = req.query.tamanno;
-        pizzaEnConstruccion.saborizacion = req.query.saborizacion;
-        pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
+        res.redirect('/login');
     }
-
-    dtCPM.getStoredProcs([
-        [dbcon.todasLasPizzas,"Descripcion"],
-        [dbcon.todosLosIngredientes, "DESCRIPCION"]
-    ], (result) => {
-
-        if (pizzaEnConstruccion.name1 === "")
+    else
+    {
+        if (Object.entries(pizzaEnConstruccion).length === 0 && pizzaEnConstruccion.constructor === Object)
         {
-            var ipx = [];
-
-            for (var i = 0; i < result.todosLosIngredientes.length; i++ )
-            {
-                ipx.push(result.todosLosIngredientes[i])
-            }
-
-            var allIng = [];
-
-            for (let i = 0; i < ipx.length; i++)
-            {
-                allIng.push({ingrediente: ipx[i], check: false});
-            }
-
-            res.render('PrimeraMitad', {
-                title: 'Seleccionar Primera Mitad',
-                style: 'PrimeraMitad.css',
-                resPizzas: result.todasLasPizzas,
-                resIngredientes:allIng
-            });
+            pizzaEnConstruccion.tamanno = req.query.tamanno;
+            pizzaEnConstruccion.saborizacion = req.query.saborizacion;
+            pizzaEnConstruccion.tipoPizza = req.query.tipoPizza;
         }
-        else
-        {
-            dbcon.ingredientesPorPizza(pizzaEnConstruccion.name1, (recordset) =>
-            {
-                var ixp = [];
 
-                for (var i = 0; i < recordset.recordset.length; i++ )
+        dtCPM.getStoredProcs([
+            [dbcon.todasLasPizzas,"Descripcion"],
+            [dbcon.todosLosIngredientes, "DESCRIPCION"]
+        ], (result) => {
+
+            if (pizzaEnConstruccion.name1 === "")
+            {
+                var ipx = [];
+
+                for (var i = 0; i < result.todosLosIngredientes.length; i++ )
                 {
-                    ixp.push(recordset.recordset[i].Descripcion)
+                    ipx.push(result.todosLosIngredientes[i])
                 }
 
                 var allIng = [];
 
-                for (let i = 0; i < result.todosLosIngredientes.length; i++)
+                for (let i = 0; i < ipx.length; i++)
                 {
-                  var obj = {};
-                    if (ixp.includes(result.todosLosIngredientes[i]))
-                    {
-                        obj = {ingrediente: result.todosLosIngredientes[i], check: true};
-                    }
-                    else
-                    {
-                        obj = {ingrediente: result.todosLosIngredientes[i], check: false};
-                    }
-                    allIng.push(obj);
+                    allIng.push({ingrediente: ipx[i], check: false});
                 }
 
                 res.render('PrimeraMitad', {
                     title: 'Seleccionar Primera Mitad',
                     style: 'PrimeraMitad.css',
                     resPizzas: result.todasLasPizzas,
-                    resIngredientes: allIng,
-                    resObj: true
+                    resIngredientes:allIng
                 });
+            }
+            else
+            {
+                dbcon.ingredientesPorPizza(pizzaEnConstruccion.name1, (recordset) =>
+                {
+                    var ixp = [];
 
-            });
-        }
-    });
+                    for (var i = 0; i < recordset.recordset.length; i++ )
+                    {
+                        ixp.push(recordset.recordset[i].Descripcion)
+                    }
+
+                    var allIng = [];
+
+                    for (let i = 0; i < result.todosLosIngredientes.length; i++)
+                    {
+                      var obj = {};
+                        if (ixp.includes(result.todosLosIngredientes[i]))
+                        {
+                            obj = {ingrediente: result.todosLosIngredientes[i], check: true};
+                        }
+                        else
+                        {
+                            obj = {ingrediente: result.todosLosIngredientes[i], check: false};
+                        }
+                        allIng.push(obj);
+                    }
+
+                    res.render('PrimeraMitad', {
+                        title: 'Seleccionar Primera Mitad',
+                        style: 'PrimeraMitad.css',
+                        resPizzas: result.todasLasPizzas,
+                        resIngredientes: allIng,
+                        resObj: true
+                    });
+
+                });
+            }
+        });
+    }
 });
 
 router.post('/setIngredientes', (req, res, next) => {

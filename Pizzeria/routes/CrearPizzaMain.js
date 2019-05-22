@@ -9,17 +9,24 @@ var tamannosPizza = ["Escoger el tamaño"];
 
 router.get('/', function(req, res, next)
 {
-    dtCPM.getStoredProcs([
-        [dbcon.todasLasSaborizaciones,"DESCRIPCION"],
-        [dbcon.todosLosTamannosPizza, "Descripcion"]
-    ], (result) => {
-        res.render('CrearPizzaMain', {
-            title: 'Crear Pizza',
-            style: 'CrearPizzaMain.css',
-            resSaborizaciones: result.saborizaciones,
-            resTamannos: result.todosLosTamannosPizza
+    if (!req.session.loggedIn)
+    {
+        res.redirect('/login');
+    }
+    else
+    {
+        dtCPM.getStoredProcs([
+            [dbcon.todasLasSaborizaciones,"DESCRIPCION"],
+            [dbcon.todosLosTamannosPizza, "Descripcion"]
+        ], (result) => {
+            res.render('CrearPizzaMain', {
+                title: 'Crear Pizza',
+                style: 'CrearPizzaMain.css',
+                resSaborizaciones: result.saborizaciones,
+                resTamannos: result.todosLosTamannosPizza
+            });
         });
-    });
+    }
 });
 
 router.post('/iniciarCreacion', (req, res) =>

@@ -13,21 +13,28 @@ function cleanIng(ing)
 
 router.get('/', function(req, res, next)
 {
-    if (Object.entries(pizzaEnConstruccion).length === 0 && pizzaEnConstruccion.constructor === Object)
+    if (!req.session.loggedIn)
     {
-        pizzaEnConstruccion = JSON.parse(req.query.order);
+        res.redirect('/login');
     }
+    else
+    {
+        if (Object.entries(pizzaEnConstruccion).length === 0 && pizzaEnConstruccion.constructor === Object)
+        {
+            pizzaEnConstruccion = JSON.parse(req.query.order);
+        }
 
-    // Query todas las saborizaciones
-    dtCPM.getStoredProcs([
-        [dbcon.todosLosIngredientes, "DESCRIPCION"]
-    ], (result) => {
-        res.render('CrearSegundaMitad', {
-            title: 'Crear Pizza',
-            style: 'CrearSegundaMitad.css',
-            resIngredientes: result.todosLosIngredientes
+        // Query todas las saborizaciones
+        dtCPM.getStoredProcs([
+            [dbcon.todosLosIngredientes, "DESCRIPCION"]
+        ], (result) => {
+            res.render('CrearSegundaMitad', {
+                title: 'Crear Pizza',
+                style: 'CrearSegundaMitad.css',
+                resIngredientes: result.todosLosIngredientes
+            });
         });
-    });
+    }
 });
 
 router.post('/readySecond', (req, res, next) => {

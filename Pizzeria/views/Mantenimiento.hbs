@@ -1,31 +1,47 @@
 <div class="container">
     <div class="panel panel-primary">
         <div class="panel-heading">Crear Nueva Pizza Especial</div>
-        <form id="nuevaPizzaEspecial" action="#" method="POST"></form>
+        <form id="nuevaPizzaEspecial" action="/Mantenimiento/CreateSpecialPizza" method="POST"></form>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 name">
                     <label for="Nombre">Digite el nuevo nombre:</label>
                     <br>
-                    <input type="text" id="Nombre" name="Nombre" placeholder="Nombre" required>
+                    <input form="nuevaPizzaEspecial" type="text" id="Nombre" name="Nombre" placeholder="Nombre" required>
                 </div>
-                <div class="col-md-4">
-
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-4 precioTamanno">
+                    <p><strong>Precios por tamaño:</strong></p>
                     <div class="table-responsive">
                         <table class= "table table-hover table-condensed table-bordered" id="tablePM">
                             <tr>
-                                <th>Ingrediente</th>
-                                <th>Agregar</th>
+                                <th>Tamaño</th>
+                                <th>Precio</th>
                             </tr>
-                            {{#each resIngredientes}}
+                            {{#each resTamannos}}
                                 <tr name="ingrediente">
                                     <td>{{this}}</td>
-                                    <td><input type="checkbox" name="{{this}}"></td>
+                                    <td><input form="nuevaPizzaEspecial" type="text" placeholder="Precio" name="{{this}}" required></td>
                                 </tr>
                             {{/each}}
                         </table>
+                    </div>
+                    </div>
+                    <div class="col-md-4 ingredientes">
+                        <p><strong>Ingredientes por pizza:</strong></p>
+                        <div class="table-responsive">
+                            <table class= "table table-hover table-condensed table-bordered" id="tablePM">
+                                <tr>
+                                    <th>Ingrediente</th>
+                                    <th>Agregar</th>
+                                </tr>
+                                {{#each resIngredientes}}
+                                    <tr name="ingrediente">
+                                        <td>{{this}}</td>
+                                        <td><input form="nuevaPizzaEspecial" type="checkbox" name="{{this}}"></td>
+                                    </tr>
+                                {{/each}}
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -33,10 +49,8 @@
         <div class="panel-footer">
             <div class="row">
                 <div class="col-md-4">
-                    <input form="nuevaPizzaEspecial" type="submit" class="btn btn-primary" name="Add" value="Add">
-                </div>
-                <div class="col-md-4">
-                    <a class="btn btn-primary" href="login">Salir</a>
+                    <a class="btn btn-primary" href="/login/logout">Salir</a>
+                    <input form="nuevaPizzaEspecial" type="submit" class="btn btn-primary" value="Add">
                 </div>
             </div>
         </div>

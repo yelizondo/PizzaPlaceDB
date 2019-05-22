@@ -5,38 +5,45 @@ var dtCPM = require('../public/javascripts/querier.js');
 
 var ensaladaEnConstruccion = {};
 
-function cleanIng(ing) 
+function cleanIng(ing)
 {
     return ing.split('-',2)[1];
 }
 
-router.get('/', function(req, res, next) 
+router.get('/', function(req, res, next)
 {
-    dtCPM.getStoredProcs([
-        [dbcon.todasLasEnsaladas,"Descripcion"],
-        [dbcon.todosLosTamannosEnsalada, "Descripcion"],
-        [dbcon.todasLasVinagretas, "Descripcion"],
-        [dbcon.todosLosIngredientes, "DESCRIPCION"]
-    ], (result) => {
-        res.render('Ensalada', {
-            title: 'Seleccionar Ensalada',
-            style: 'Ensalada.css',
-            resEnsaladas: result.todasLasEnsaladas,
-            resTamannosEnsalada: result.todosLostamannosEnsalada,
-            resVinagretas: result.todasLasVinagretas,
-            resIngredientes: result.todosLosIngredientes
+    if (!req.session.loggedIn)
+    {
+        res.redirect('/login');
+    }
+    else
+    {
+        dtCPM.getStoredProcs([
+            [dbcon.todasLasEnsaladas,"Descripcion"],
+            [dbcon.todosLosTamannosEnsalada, "Descripcion"],
+            [dbcon.todasLasVinagretas, "Descripcion"],
+            [dbcon.todosLosIngredientes, "DESCRIPCION"]
+        ], (result) => {
+            res.render('Ensalada', {
+                title: 'Seleccionar Ensalada',
+                style: 'Ensalada.css',
+                resEnsaladas: result.todasLasEnsaladas,
+                resTamannosEnsalada: result.todosLostamannosEnsalada,
+                resVinagretas: result.todasLasVinagretas,
+                resIngredientes: result.todosLosIngredientes
+            });
         });
-    });
+    }
 });
 
-router.post('/iniciarCreacion', (req, res, next) => 
+router.post('/iniciarCreacion', (req, res, next) =>
 {
     var listIng = [];
-    for (var key in req.body) 
+    for (var key in req.body)
     {
         var ing = {};
 
-        if (key !== 'tamanno', key != 'vinagreta', key !== 'ensalada' && key !== 'Añadir al Carrito' ) 
+        if (key !== 'tamanno', key != 'vinagreta', key !== 'ensalada' && key !== 'Añadir al Carrito' )
         {
             if (key[0] === 'a')
             {
@@ -47,9 +54,9 @@ router.post('/iniciarCreacion', (req, res, next) =>
             else if (key[0] === 'e')
             {
 
-                let obj = listIng.find((o, i) => 
+                let obj = listIng.find((o, i) =>
                 {
-                    if (o.name === cleanIng(key)) 
+                    if (o.name === cleanIng(key))
                     {
                         listIng[i] = { name: cleanIng(key), extra: true };
                     }
@@ -65,7 +72,7 @@ router.post('/iniciarCreacion', (req, res, next) =>
         ensaladaEnConstruccion.pollo = true;
     }else{
         ensaladaEnConstruccion.pollo = false;
-    }    
+    }
     ensaladaEnConstruccion.cantidad = req.body.cantidad;
     ensaladaEnConstruccion.ingredientes = listIng;
     var info = "?order=" + JSON.stringify(ensaladaEnConstruccion) + "&tipoOrden=ensalada";

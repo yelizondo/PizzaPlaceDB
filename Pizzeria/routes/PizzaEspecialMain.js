@@ -6,18 +6,25 @@ var dtCPM = require('../public/javascripts/querier.js');
 
 router.get('/', function(req, res, next)
 {
-    // Query todas las saborizaciones
-    dtCPM.getStoredProcs([
-        [dbcon.todasLasSaborizaciones,"DESCRIPCION"],
-        [dbcon.todosLosTamannosPizza, "Descripcion"]
-    ], (result) => {
-        res.render('PizzaEspecialMain', {
-            title: 'Seleccionar Pizza Especial',
-            style: 'PizzaEspecialMain.css',
-            resSaborizaciones: result.saborizaciones,
-            resTamannos: result.todosLosTamannosPizza
+    if (!req.session.loggedIn)
+    {
+        res.redirect('/login');
+    }
+    else
+    {
+        // Query todas las saborizaciones
+        dtCPM.getStoredProcs([
+            [dbcon.todasLasSaborizaciones,"DESCRIPCION"],
+            [dbcon.todosLosTamannosPizza, "Descripcion"]
+        ], (result) => {
+            res.render('PizzaEspecialMain', {
+                title: 'Seleccionar Pizza Especial',
+                style: 'PizzaEspecialMain.css',
+                resSaborizaciones: result.saborizaciones,
+                resTamannos: result.todosLosTamannosPizza
+            });
         });
-    });
+    }
 });
 
 router.post('/iniciarCreacion', (req, res) =>

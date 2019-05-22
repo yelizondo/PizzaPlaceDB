@@ -6,11 +6,18 @@ var pizzaEnConstruccion = {};
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
-    pizzaEnConstruccion = JSON.parse(req.query.order);
-    res.render('DosSaboresFinal', {
-        title: 'Crear Pizza',
-        style: 'DosSaboresFinal.css'
-    });
+    if (!req.session.loggedIn)
+    {
+        res.redirect('/login');
+    }
+    else
+    {
+        pizzaEnConstruccion = JSON.parse(req.query.order);
+        res.render('DosSaboresFinal', {
+            title: 'Crear Pizza',
+            style: 'DosSaboresFinal.css'
+        });
+    }
 });
 
 router.post('/addQuantity', (req, res) => {

@@ -18,3 +18,16 @@ footer {
 .col-md-4 {
   padding: 10px 10px 10px 10px;
 }
+
+.name {
+    padding-left: 5%;
+    width: 25%;
+}
+
+.precioTamanno {
+    padding-right: 5%;
+}
+
+.ingredientes {
+    padding-left: 5%;
+}

@@ -1,7 +1,7 @@
 body{
     margin: 0;
     padding: 0;
-    background: url("/images/pizza.jpg"); 
+    background: url("/images/pizza.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     font-family: sans-serif;
@@ -47,7 +47,7 @@ h1{
     margin-bottom: 20px;
 }
 
-.loginbox input[type="text"], input[type="password"]
+.loginbox input[type="email"], input[type="password"]
 {
     border: none;
     border-bottom: 1px solid #fff;

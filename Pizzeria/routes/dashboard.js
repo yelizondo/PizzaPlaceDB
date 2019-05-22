@@ -6,11 +6,18 @@ var Orden = [];
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.render('dashboard', {
-        title: 'Dashboard',
-        style: 'dashboard.css',
-        resOrden: Orden
-    });
+    if (!req.session.loggedIn)
+    {
+        res.redirect('/login');
+    }
+    else
+    {
+        res.render('dashboard', {
+            title: 'Dashboard',
+            style: 'dashboard.css',
+            resOrden: Orden
+        });
+    }
 });
 
 // Tomar el id de session

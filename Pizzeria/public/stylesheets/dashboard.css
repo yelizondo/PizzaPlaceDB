@@ -60,3 +60,9 @@ footer {
 .dashboard-btn {
     width: 115px;;
 }
+
+.table-responsive {
+    width: 150%;
+    height: 440px;
+    overflow-y: auto;
+}

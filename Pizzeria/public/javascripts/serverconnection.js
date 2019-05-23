@@ -401,5 +401,36 @@ module.exports = {
 				connection.close();
 			});
 		});
+	},
+
+	calcularPrecioTamannoPizza: function (pTamanno, callback)
+	{
+		var connection = new sql.ConnectionPool(dbConfig);
+		var request = new sql.Request(connection);
+		connection.connect (function (err)
+		{
+			if (err)
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+			var result = 0;
+			request.input('Tamanno', sql.VarChar(50), pTamanno)
+
+			request.execute('SP_CalcularPrecioTamannoPizza', function (err, recordset, returnValue)
+			{
+				if (err)
+				{
+					console.log(err);
+				}
+				else
+				{
+					recordset.spName = 'calcularPrecioTamannoPizza';
+					callback(recordset);
+				}
+				connection.close();
+			});
+		});
 	}
 }

@@ -11,7 +11,6 @@ var dbConfig = {
 
 
 module.exports = {
-
 	createNewClient : function (pNombre, pTelefono, pDireccion, pMail, callback)
 	{
 		var connection = new sql.ConnectionPool(dbConfig);

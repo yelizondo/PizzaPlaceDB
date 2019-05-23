@@ -369,5 +369,37 @@ module.exports = {
 				connection.close();
 			});
 		});
+	},
+
+	calcularPrecioTamannoIngrediente: function (pIngrediente, pTamanno, callback)
+	{
+		var connection = new sql.ConnectionPool(dbConfig);
+		var request = new sql.Request(connection);
+		connection.connect (function (err)
+		{
+			if (err)
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+			var result = 0;
+			request.input('Ingrediente', sql.VarChar(50), pIngrediente)
+			request.input('Tamanno', sql.VarChar(50), pTamanno)
+
+			request.execute('SP_CalcularPrecioTamannoIngrediente', function (err, recordset, returnValue)
+			{
+				if (err)
+				{
+					console.log(err);
+				}
+				else
+				{
+					recordset.spName = 'calcularPrecioTamannoIngrediente';
+					callback(recordset);
+				}
+				connection.close();
+			});
+		});
 	}
 }

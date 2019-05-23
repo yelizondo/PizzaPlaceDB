@@ -73,7 +73,7 @@ router.post('/iniciarCreacion', (req, res, next) =>
         ensaladaEnConstruccion.pollo = 'Pollo';
     }else{
         ensaladaEnConstruccion.pollo = '';
-    }
+}
     ensaladaEnConstruccion.cantidad = req.body.cantidad;
     ensaladaEnConstruccion.ingredientes = listIng;
     var info = "?order=" + JSON.stringify(ensaladaEnConstruccion);

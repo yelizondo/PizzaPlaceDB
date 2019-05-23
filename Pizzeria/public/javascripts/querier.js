@@ -27,6 +27,48 @@ function prepareResultObject(pArray)
     return result;
 }
 
+function cleanQueryResults1 (recordset, attNames)
+{
+    var resObj = {};
+    var cantidadElementos = recordset.rowsAffected;
+    var elementos = recordset.recordset;
+    var spName = recordset.spName;
+
+    for (var i = 0; i < attNames.length; i++)
+    {
+        var elements = [];
+        for (var j = 0; j < cantidadElementos; j++)
+        {
+            elements.push(elementos[j][attNames[i]]);
+        }
+        resObj[attNames[i]] = elements;
+    }
+
+    return {name:spName, elements: resObj};
+}
+
+
+
+function prepareResultObject1(pArray)
+{
+    var result = {};
+
+    pArray.forEach((item) => {
+        if (result[item.name] == undefined)
+        {
+            result[item.name] = [];
+            result[item.name].push(item.elements);
+
+        }
+        else {
+            result[item.name].push(item.elements);
+        }
+    });
+
+    return result;
+}
+
+
 module.exports = {
     getStoredProcs: (procs, callback) => {
         var functions = [];
@@ -58,7 +100,7 @@ module.exports = {
            callback(prepareResultObject(results));
         });
     },
-    getStoredProcs1: (procs, callback) => {
+    getStoredProcsArgs: (procs, callback) => {
         var functions = [];
 
         procs.forEach((item) =>
@@ -67,8 +109,8 @@ module.exports = {
             var f = item[0];
             // Object
             var atts = item[1];
-            // String
-            var description = atts.Description;
+            // Array
+            var res = atts.Res;
             // Object
             var args = atts.Args
 
@@ -77,9 +119,9 @@ module.exports = {
                 // This calls the functions
                 functions.push( (callback) =>
                 {
-                    f(args , (recordset) =>
+                    f(args, (recordset) =>
                     {
-                        callback(null, recordset);
+                        callback(null, cleanQueryResults1(recordset,res));
                     });
                 });
             }
@@ -88,13 +130,12 @@ module.exports = {
                 console.log(procs[i], "Not a function");
             }
         });
-
         async.parallel(functions, (err, results) => {
             if (err)
             {
                 console.log(err);
             }
-           callback(results);
+           callback(prepareResultObject1(results));
         });
     }
 };

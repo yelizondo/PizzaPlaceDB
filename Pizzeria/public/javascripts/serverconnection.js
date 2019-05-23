@@ -370,8 +370,10 @@ module.exports = {
 		});
 	},
 
-	calcularPrecioTamannoIngrediente: function (pIngrediente, pTamanno, callback)
+	calcularPrecioTamannoIngrediente: function (args, callback)
 	{
+		var pIngrediente = args.Ingrediente;
+		var pTamanno = args.Tamanno;
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err)

@@ -11,7 +11,6 @@ var dbConfig = {
 
 
 module.exports = {
-
 	createNewClient : function (pNombre, pTelefono, pDireccion, pMail, callback)
 	{
 		var connection = new sql.ConnectionPool(dbConfig);
@@ -371,8 +370,10 @@ module.exports = {
 		});
 	},
 
-	calcularPrecioTamannoIngrediente: function (pIngrediente, pTamanno, callback)
+	calcularPrecioTamannoIngrediente: function (args, callback)
 	{
+		var pIngrediente = args.Ingrediente;
+		var pTamanno = args.Tamanno;
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err)

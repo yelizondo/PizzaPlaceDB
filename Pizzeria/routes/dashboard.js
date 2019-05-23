@@ -43,7 +43,7 @@ router.get('/addToCart', (req, res, next) => {
                 ing = ing + ' ' + obj.ingredientes[i].name;
                 if(obj.ingredientes[i].extra){
                     ext = ext + ' ' + obj.ingredientes[i].name;
-                } 
+                }
             }
             if(obj.vinagreta != 'Ninguna'){
                 vin = obj.vinagreta;
@@ -63,7 +63,7 @@ router.get('/addToCart', (req, res, next) => {
                 ing = ing + ' ' + obj.ingredientes[i].name;
                 if(obj.ingredientes[i].extra){
                     ext = ext + ' ' + obj.ingredientes[i].name;
-                } 
+                }
             }
             Orden.push({elemento: obj.tipo,
                 tamanno: obj.tamanno,
@@ -80,7 +80,7 @@ router.get('/addToCart', (req, res, next) => {
                 ingP1 = ingP1 + ' ' + obj.ingredientesP1[i].name;
                 if(obj.ingredientesP1[i].extra){
                     extP1 = extP1 + ' ' + obj.ingredientesP1[i].name;
-                } 
+                }
             }
             var ingP2 = '\n\n--\nIngredientes Segunda Mitad: ';
             var extP2 = '\n\n--\nExtras Segunda Mitad:';
@@ -88,8 +88,8 @@ router.get('/addToCart', (req, res, next) => {
                 ingP2 = ingP2 + ' ' + obj.ingredientesP2[i].name;
                 if(obj.ingredientesP2[i].extra){
                     extP2 = extP2 + ' ' + obj.ingredientesP2[i].name;
-                } 
-            }               
+                }
+            }
             Orden.push({elemento: obj.tipo,
                 tamanno: obj.tamanno,
                 cantidad: obj. cantidad,
@@ -105,7 +105,7 @@ router.get('/addToCart', (req, res, next) => {
                     ingP1 = ingP1 + ' ' + obj.ingredientesP1[i].name;
                     if(obj.ingredientesP1[i].extra){
                         extP1 = extP1 + ' ' + obj.ingredientesP1[i].name;
-                    } 
+                    }
                 }
                 var ingP2 = '\n\n--\nIngredientes Segunda Mitad: ';
                 var extP2 = '\n\n--\nExtras Segunda Mitad:';
@@ -113,8 +113,8 @@ router.get('/addToCart', (req, res, next) => {
                     ingP2 = ingP2 + ' ' + obj.ingredientesP2[i].name;
                     if(obj.ingredientesP2[i].extra){
                         extP2 = extP2 + ' ' + obj.ingredientesP2[i].name;
-                    } 
-                }  
+                    }
+                }
                 Orden.push({elemento: obj.name1+'/'+obj.name2,
                     tamanno: obj.tamanno,
                     cantidad: obj. cantidad,
@@ -122,11 +122,16 @@ router.get('/addToCart', (req, res, next) => {
                     extras: extP1 + extP2,
                     precio: '0.0'
                 })
-                break;            
+                break;
         default:
             console.log('default');
     }
-    res.redirect('/dashboard');
+    renderDashboard();
 });
+
+function renderDashboard()
+{
+    res.redirect('/dashboard');
+}
 
 module.exports = router;

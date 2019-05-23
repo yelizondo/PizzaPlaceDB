@@ -1,10 +1,38 @@
 /*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
+var dtC = require('../public/javascripts/querier.js');
+var dbcon = require('../public/javascripts/serverconnection.js');
 
 var Orden = [];
+var Total = 0;
 
-/* GET users listing. */
+function generarQueryList(listaIngredientes, tamanno)
+{
+   var result = [];
+
+   for (var i = 0; i < listaIngredientes.length; i++)
+   {
+       var nameIng = listaIngredientes[i].name;
+
+       var query = [dbcon.calcularPrecioTamannoIngrediente,
+           { Res : ["Precio"],
+             Args : { Tamanno:tamanno, Ingrediente:nameIng}}];
+
+       if (listaIngredientes[i].extra)
+       {
+           result.push(query);
+       }
+
+       result.push(query);
+   }
+   result.push([dbcon.calcularPrecioTamannoPizza,
+       { Res : ["Precio"], Args : {Tamanno:tamanno}}]);
+
+   return result;
+}
+
+
 router.get('/', function(req, res, next) {
     if (!req.session.loggedIn)
     {
@@ -12,15 +40,28 @@ router.get('/', function(req, res, next) {
     }
     else
     {
+        if (req.query.newOrder)
+        {
+            Orden.push(JSON.parse(req.query.newOrder));
+        }
+
+
+        if (Orden.length > 0)
+        {
+            for (var i = 0; i < Orden.length; i++)
+            {
+                Total += Orden[i].precio;
+            }
+        }
+
         res.render('dashboard', {
             title: 'Dashboard',
             style: 'dashboard.css',
-            resOrden: Orden
+            resOrden: Orden,
+            resTotal: Total
         });
     }
 });
-
-
 
 router.get('/addToCart', (req, res, next) => {
     console.log(JSON.parse(req.query.order));
@@ -57,21 +98,45 @@ router.get('/addToCart', (req, res, next) => {
             })
             break;
         case 'UnSabor':
-            var ing = 'Ingredientes: ';
-            var ext = '';
-            for (i = 0; i < obj.ingredientes.length; i++){
-                ing = ing + ' ' + obj.ingredientes[i].name;
-                if(obj.ingredientes[i].extra){
-                    ext = ext + ' ' + obj.ingredientes[i].name;
+
+            var queries = generarQueryList(obj.ingredientes, obj.tamanno);
+
+            dtC.getStoredProcsArgs(queries, (result) =>
+            {
+                var precio = 0;
+                for (var i = 0; i < result.calcularPrecioTamannoIngrediente.length; i++)
+                {
+                    precio += parseInt(result.calcularPrecioTamannoIngrediente[i].Precio, 10);
                 }
-            }
-            Orden.push({elemento: obj.tipo,
-                tamanno: obj.tamanno,
-                cantidad: obj. cantidad,
-                detalles: ing,
-                extras: ext,
-                precio: '0.0'
-            })
+
+                precio +=  parseInt(result.calcularPrecioTamannoPizza[0].Precio, 10);
+
+                precio *= parseInt(obj.cantidad);
+
+
+                var ing = 'Ingredientes: ';
+                var ext = '';
+                for (i = 0; i < obj.ingredientes.length; i++){
+                    ing = ing + ' ' + obj.ingredientes[i].name;
+                    if(obj.ingredientes[i].extra){
+                        ext = ext + ' ' + obj.ingredientes[i].name;
+                    }
+                }
+
+                order = {
+                    elemento: obj.tipo,
+                    tamanno: obj.tamanno,
+                    cantidad: obj. cantidad,
+                    detalles: ing,
+                    extras: ext,
+                    precio: precio
+                };
+
+                var info = "?newOrder=" + JSON.stringify(order);
+
+                res.redirect('/dashboard' + info);
+            });
+
             break;
         case 'DosSabores':
             var ingP1 = 'Ingredientes Primera Mitad: ';
@@ -126,12 +191,11 @@ router.get('/addToCart', (req, res, next) => {
         default:
             console.log('default');
     }
-    renderDashboard();
+    //res.redirect('/dashboard');
 });
 
-function renderDashboard()
-{
-    res.redirect('/dashboard');
-}
+
+
+
 
 module.exports = router;

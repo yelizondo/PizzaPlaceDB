@@ -51,7 +51,7 @@
                       <td>{{this.cantidad}}</td>
                       <td>{{this.detalles}}</td>
                       <td>{{this.extras}}</td>
-                      <td>{{this.precio}}</td>
+                      <td>₡{{this.precio}}</td>
                   </tr>
               {{/each}}
             </table>
@@ -70,6 +70,9 @@
             <a href="Bebida" class="btn btn-danger pull-right">
               Realizar Pedido
             </a>
+        </div>
+        <div class="col-md-4">
+            <p class="precioTotal">Total: ₡{{resTotal}}</p>
         </div>
       </div>
     </div>

@@ -404,8 +404,9 @@ module.exports = {
 		});
 	},
 
-	calcularPrecioTamannoPizza: function (pTamanno, callback)
+	calcularPrecioTamannoPizza: function (args, callback)
 	{
+		var pTamanno = args.Tamanno;
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err)

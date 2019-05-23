@@ -43,6 +43,7 @@ footer {
 
 .col-md-4 {
   padding: 10px 10px 10px 10px;
+  text-align: center;
 }
 
 .table {
@@ -65,4 +66,12 @@ footer {
     width: 150%;
     height: 440px;
     overflow-y: auto;
+}
+
+.precioTotal {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 2%;
 }

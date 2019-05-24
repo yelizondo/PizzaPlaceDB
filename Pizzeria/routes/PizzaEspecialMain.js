@@ -44,7 +44,7 @@ router.post('/iniciarCreacion', (req, res) =>
         res.redirect('/PrimeraMitad?tamanno=' + bodyTamannos +
         '&saborizacion=' +bodySaborizacion +
         '&tipoOrden=' + bodyCantSabores);
-    }1
+    }
 });
 
 module.exports = router;

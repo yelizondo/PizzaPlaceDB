@@ -13,6 +13,34 @@ var dbConfig = {
 
 
 module.exports = {
+	insertarOrden : (pOrden, callback) => {
+		var connection = new sql.ConnectionPool(dbConfig);
+		var request = new sql.Request(connection);
+		connection.connect (function (err)
+		{
+			if (err)
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.input('Orden', sql.VarChar(4000), pOrden)
+
+			request.execute('SP_InsertOrden', function (err, recordset, returnValue) {
+				if (err)
+				{
+					console.log(err);
+				}
+				else
+				{
+					callback(recordset);
+				}
+				connection.close();
+			});
+		})
+	},
+
 	insertNewPizza : function (pizza, callback)
 	{
 		var tpxt = new sql.Table(); // You can optionally specify table type name in the first argument.
@@ -23,19 +51,18 @@ module.exports = {
 		var tixp = new sql.Table();
 		tixp.columns.add('Pizza', sql.VarChar(50));
 		tixp.columns.add('Ingrediente', sql.VarChar(50));
-		console.log(1);
+
 		for (var i = 0; i < pizza.ingredientes.length; i++)
 		{
 			tixp.rows.add(pizza.nombre, pizza.ingredientes[i]);
 		}
-		console.log(2);
 		for (var j = 0; j < pizza.preciosXTamanno.length; j++)
 		{
 			tpxt.rows.add(pizza.nombre,
 				pizza.preciosXTamanno[j].tamanno,
 				parseInt(pizza.preciosXTamanno[j].precio, 10) );
 		}
-		console.log(3);
+
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);
 		connection.connect (function (err)

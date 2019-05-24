@@ -6,6 +6,7 @@ var dbcon = require('../public/javascripts/serverconnection.js');
 
 var Orden = [];
 var Total = 0;
+var Cart = {};
 
 function generarQueryPizza(listaIngredientes, tamanno)
 {
@@ -32,6 +33,104 @@ function generarQueryPizza(listaIngredientes, tamanno)
    return result;
 }
 
+function addOrderToCart(pType, pQuantity, pExtraInfo)
+{
+    var detail = {};
+
+    switch (pType)
+    {
+        case 'Bebida':
+            detail.type = pType;
+            detail.quantity = pQuantity;
+            break;
+        case 'Ensalada':
+            detail.type = pType;
+            detail.quantity = pQuantity;
+
+            if (pExtraInfo.Vinagreta)
+                detail.vinagreta = pExtraInfo.Vinagreta;
+            else
+                detail.vinagreta = 'Ninguno';
+
+            detail.ingredients = [];
+
+            if (pExtraInfo.Pollo)
+                detail.ingredients.push('Pollo');
+
+            for (var i = 0; i < pExtraInfo.Ingredientes.length; i++)
+            {
+                if (pExtraInfo.Ingredientes[i].extra)
+                {
+                    detail.ingredients.push(pExtraInfo.Ingredientes[i]);
+                }
+                detail.ingredients.push(pExtraInfo.Ingredientes[i]);
+            }
+            break;
+        case 'UnSabor':
+            detail.quantity = pQuantity;
+
+            if (pExtraInfo.Nombre == "Pizza Personalizada")
+            {
+                detail.type = "PizzaPersonalizada";
+            }
+            else
+            {
+                detail.type = "PizzaEspecialUnSabor";
+                detail.name = pExtraInfo.Nombre;
+            }
+
+            detail.ingredients = [];
+            for (var i = 0; i < pExtraInfo.Ingredientes.length; i++)
+            {
+                if (pExtraInfo.Ingredientes[i].extra)
+                {
+                    detail.ingredients.push(pExtraInfo.Ingredientes[i]);
+                }
+                detail.ingredients.push(pExtraInfo.Ingredientes[i]);
+            }
+
+            break;
+        case 'DosSabores':
+            detail.type = "PizzaPersonalizada";
+            detail.quantity = pQuantity;
+            detail.ingredients = [];
+
+            for (var i = 0; i < pExtraInfo.IngredientesP1.length; i++)
+            {
+                if (pExtraInfo.IngredientesP1[i].extra)
+                {
+                    detail.ingredients.push(pExtraInfo.IngredientesP1[i]);
+                }
+                detail.ingredients.push(pExtraInfo.IngredientesP1[i]);
+            }
+
+            for (var i = 0; i < pExtraInfo.IngredientesP2.length; i++)
+            {
+                if (pExtraInfo.IngredientesP2[i].extra)
+                {
+                    detail.ingredients.push(pExtraInfo.IngredientesP2[i]);
+                }
+                detail.ingredients.push(pExtraInfo.IngredientesP2[i]);
+            }
+
+            break;
+        case 'DosSaboresEspecial':
+            detail.type = "PizzaEspecialDosSabores";
+            detail.quantity = pQuantity;
+            detail.name1 = pExtraInfo.Nombre1;
+            detail.name2 = pExtraInfo.Nombre2;
+            detail.ingredients1 = pExtraInfo.IngredientesP1;
+            detail.ingredients2 = pExtraInfo.IngredientesP2;
+            break;
+        default:
+            break;
+    }
+    if (!Cart.details)
+    {
+        Cart.details = [];
+    }
+    Cart.details.push(detail);
+}
 
 router.get('/', function(req, res, next) {
     if (!req.session.loggedIn)
@@ -40,12 +139,17 @@ router.get('/', function(req, res, next) {
     }
     else
     {
+        // Set the buyers email
+        if (req.session.username) {
+            Cart.email = req.session.username;
+        }
+
+        // Adds a new Order to the visual cart
         if (req.query.newOrder)
         {
             Orden.push(JSON.parse(req.query.newOrder));
         }
         Total = 0;
-        console.log(Orden);
         if (Orden.length > 0)
         {
             for (var i = 0; i < Orden.length; i++)
@@ -63,9 +167,7 @@ router.get('/', function(req, res, next) {
     }
 });
 
-
 router.get('/addToCart', (req, res, next) => {
-    console.log(JSON.parse(req.query.order));
     var obj = JSON.parse(req.query.order);
     switch(obj.tipoOrden){
         case 'bebida':
@@ -85,10 +187,10 @@ router.get('/addToCart', (req, res, next) => {
                     extras: '',
                     precio: precio
                 };
-
+                addOrderToCart('Bebida', parseInt(obj.cantidad, 10),{Ingredientes:[]});
                 var info = "?newOrder=" + JSON.stringify(order);
-    
-                res.redirect('/dashboard' + info);              
+
+                res.redirect('/dashboard' + info);
             });
             break;
 
@@ -98,7 +200,7 @@ router.get('/addToCart', (req, res, next) => {
                 var precio = 0;
 
                 precio +=  parseInt(result.recordset[0].Precio, 10);
-      
+
                 var ing = 'Ingredientes: ';
                 var ext = '';
                 var vin = '';
@@ -116,9 +218,9 @@ router.get('/addToCart', (req, res, next) => {
                 if(obj.pollo == 'Pollo'){
                     precio += (200)
                 }
-    
+
                 precio *= parseInt(obj.cantidad);
-    
+
                 order = {
                     elemento: obj.tipo,
                     tamanno: obj.tamanno,
@@ -127,9 +229,16 @@ router.get('/addToCart', (req, res, next) => {
                     extras: vin + ' ' + ext + ' ' + obj.pollo,
                     precio: precio
                 };
-    
+
+                addOrderToCart('Ensalada', parseInt(obj.cantidad, 10),
+                {
+                    Ingredientes:obj.ingredientes,
+                    Vinagreta:obj.vinagreta,
+                    Pollo:obj.pollo
+                });
+
                 var info = "?newOrder=" + JSON.stringify(order);
-    
+
                 res.redirect('/dashboard' + info);
             });
 
@@ -169,6 +278,13 @@ router.get('/addToCart', (req, res, next) => {
                     precio: precio
                 };
 
+
+                addOrderToCart('UnSabor', parseInt(obj.cantidad, 10),
+                {
+                    Ingredientes:obj.ingredientes,
+                    Nombre:obj.tipo
+                });
+
                 var info = "?newOrder=" + JSON.stringify(order);
 
                 res.redirect('/dashboard' + info);
@@ -207,7 +323,7 @@ router.get('/addToCart', (req, res, next) => {
                             extP2 = extP2 + ' ' + obj.ingredientesP2[i].name;
                         }
                     }
-                    
+
                     order = {
                         elemento: obj.tipo,
                         tamanno: obj.tamanno,
@@ -216,9 +332,15 @@ router.get('/addToCart', (req, res, next) => {
                         extras: extP1 + extP2,
                         precio: precio
                     };
-                
+
+                    addOrderToCart('DosSabores', parseInt(obj.cantidad, 10),
+                    {
+                        IngredientesP1:obj.ingredientesP1,
+                        IngredientesP2:obj.ingredientesP2
+                    });
+
                     var info = "?newOrder=" + JSON.stringify(order);
-    
+
                     res.redirect('/dashboard' + info);
                 });
             break;
@@ -255,7 +377,7 @@ router.get('/addToCart', (req, res, next) => {
                             extP2 = extP2 + ' ' + obj.ingredientesP2[i].name;
                         }
                     }
-                    
+
                     order = {
                         elemento: obj.name1+'/'+obj.name2,
                         tamanno: obj.tamanno,
@@ -264,9 +386,17 @@ router.get('/addToCart', (req, res, next) => {
                         extras: extP1 + extP2,
                         precio: precio
                     };
-                
+
+                    addOrderToCart('DosSaboresEspecial', parseInt(obj.cantidad, 10),
+                    {
+                        Nombre1: obj.name1,
+                        Nombre2: obj.name2,
+                        IngredientesP1:obj.ingredientesP1,
+                        IngredientesP2:obj.ingredientesP2
+                    });
+
                     var info = "?newOrder=" + JSON.stringify(order);
-    
+
                     res.redirect('/dashboard' + info);
                 });
                 break;
@@ -274,6 +404,22 @@ router.get('/addToCart', (req, res, next) => {
             console.log('default');
     }
     //res.redirect('/dashboard');
+});
+
+router.get('/makePurchase', (req, res, next) => {
+    // Limpiar el carrito visual
+    Orden = [];
+
+    // Insertar en Base de datos
+    dbcon.insertarOrden(Cart, (result) => {
+
+    });
+
+    // Limpio el carrito
+    Cart = {};
+
+    // Redirecciono a la pagina principal
+    res.redirect('/dashboard');
 });
 
 module.exports = router;

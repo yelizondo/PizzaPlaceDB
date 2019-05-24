@@ -43,10 +43,12 @@ function addOrderToCart(pType, pQuantity, pExtraInfo)
         case 'Bebida':
             detail.type = pType;
             detail.quantity = pQuantity;
+            detail.name = pExtraInfo.Nombre;
             break;
         case 'Ensalada':
             detail.type = pType;
             detail.quantity = pQuantity;
+            detail.name = pExtraInfo.Nombre;
 
             if (pExtraInfo.Vinagreta)
                 detail.vinagreta = pExtraInfo.Vinagreta;
@@ -56,15 +58,15 @@ function addOrderToCart(pType, pQuantity, pExtraInfo)
             detail.ingredients = [];
 
             if (pExtraInfo.Pollo)
-                detail.ingredients.push('Pollo');
+                detail.ingredients.push({name:'Pollo'});
 
             for (var i = 0; i < pExtraInfo.Ingredientes.length; i++)
             {
                 if (pExtraInfo.Ingredientes[i].extra)
                 {
-                    detail.ingredients.push(pExtraInfo.Ingredientes[i]);
+                    detail.ingredients.push({name:pExtraInfo.Ingredientes[i]});
                 }
-                detail.ingredients.push(pExtraInfo.Ingredientes[i]);
+                detail.ingredients.push({name:pExtraInfo.Ingredientes[i]});
             }
             break;
         case 'UnSabor':
@@ -85,9 +87,9 @@ function addOrderToCart(pType, pQuantity, pExtraInfo)
             {
                 if (pExtraInfo.Ingredientes[i].extra)
                 {
-                    detail.ingredients.push(pExtraInfo.Ingredientes[i]);
+                    detail.ingredients.push({name:pExtraInfo.Ingredientes[i]});
                 }
-                detail.ingredients.push(pExtraInfo.Ingredientes[i]);
+                detail.ingredients.push({name:pExtraInfo.Ingredientes[i]});
             }
 
             break;
@@ -100,18 +102,18 @@ function addOrderToCart(pType, pQuantity, pExtraInfo)
             {
                 if (pExtraInfo.IngredientesP1[i].extra)
                 {
-                    detail.ingredients.push(pExtraInfo.IngredientesP1[i]);
+                    detail.ingredients.push({name:pExtraInfo.IngredientesP1[i]});
                 }
-                detail.ingredients.push(pExtraInfo.IngredientesP1[i]);
+                detail.ingredients.push({name:pExtraInfo.IngredientesP1[i]});
             }
 
             for (var i = 0; i < pExtraInfo.IngredientesP2.length; i++)
             {
                 if (pExtraInfo.IngredientesP2[i].extra)
                 {
-                    detail.ingredients.push(pExtraInfo.IngredientesP2[i]);
+                    detail.ingredients.push({name:pExtraInfo.IngredientesP2[i]});
                 }
-                detail.ingredients.push(pExtraInfo.IngredientesP2[i]);
+                detail.ingredients.push({name:pExtraInfo.IngredientesP2[i]});
             }
 
             break;
@@ -120,8 +122,16 @@ function addOrderToCart(pType, pQuantity, pExtraInfo)
             detail.quantity = pQuantity;
             detail.name1 = pExtraInfo.Nombre1;
             detail.name2 = pExtraInfo.Nombre2;
-            detail.ingredients1 = pExtraInfo.IngredientesP1;
-            detail.ingredients2 = pExtraInfo.IngredientesP2;
+            detail.ingredients1 = [];
+            detail.ingredients2 = [];
+
+            for (var i = 0; i < pExtraInfo.IngredientesP1.length; i++) {
+                detail.ingredients1.push({name:pExtraInfo.IngredientesP1[i]});
+            }
+            for (var i = 0; i < pExtraInfo.IngredientesP2.length; i++) {
+                detail.ingredients2.push({name:pExtraInfo.IngredientesP2[i]});
+            }
+
             break;
         default:
             break;
@@ -188,7 +198,7 @@ router.get('/addToCart', (req, res, next) => {
                     extras: '',
                     precio: precio
                 };
-                addOrderToCart('Bebida', parseInt(obj.cantidad, 10),{Ingredientes:[]});
+                addOrderToCart('Bebida', parseInt(obj.cantidad, 10),{Nombre:obj.tipo, Ingredientes:[]});
                 var info = "?newOrder=" + JSON.stringify(order);
 
                 res.redirect('/dashboard' + info);
@@ -230,9 +240,9 @@ router.get('/addToCart', (req, res, next) => {
                     extras: vin + ' ' + ext + ' ' + obj.pollo,
                     precio: precio
                 };
-
                 addOrderToCart('Ensalada', parseInt(obj.cantidad, 10),
                 {
+                    Nombre: obj.tipo,
                     Ingredientes:obj.ingredientes,
                     Vinagreta:obj.vinagreta,
                     Pollo:obj.pollo
@@ -341,7 +351,7 @@ router.get('/addToCart', (req, res, next) => {
                     });
 
                     var info = "?newOrder=" + JSON.stringify(order);
-
+                    console.log('Hola');
                     res.redirect('/dashboard' + info);
                 });
             break;
@@ -415,6 +425,8 @@ router.get('/makePurchase', (req, res, next) => {
     dbcon.insertarOrden(Cart, (result) => {
 
     });
+
+    console.log(Cart);
 
     // Limpio el carrito
     Cart = {};

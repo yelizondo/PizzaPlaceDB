@@ -73,8 +73,9 @@ router.post('/readyFirst', (req, res, next) => {
 
     pizzaEnConstruccion.tipo = 'Pizza Personalizada';
     pizzaEnConstruccion.ingredientesP1 = listIng;
+    var args = '?order=' + JSON.stringify(pizzaEnConstruccion);
     pizzaEnConstruccion = {};
-    res.redirect('/CrearSegundaMitad?order=' + JSON.stringify(pizzaEnConstruccion));
+    res.redirect('/CrearSegundaMitad' + args);
 });
 
 module.exports = router;

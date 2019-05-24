@@ -92,7 +92,6 @@ router.post('/iniciarCreacion', (req, res, next) =>
     }
 
     ensaladaEnConstruccion.tipoOrden = 'ensalada';
-    ensaladaEnConstruccion.tipo = req.body.ensalada;
     ensaladaEnConstruccion.tamanno = req.body.tamanno;
     ensaladaEnConstruccion.vinagreta = req.body.vinagreta;
     if(req.body.pollo){
@@ -110,6 +109,7 @@ router.post('/iniciarCreacion', (req, res, next) =>
 router.post('/setIngredientes', (req, res, next) =>
 {
     var ensalada = req.body.ensalada;
+    ensaladaEnConstruccion.tipo = req.body.ensalada;
     dbcon.ingredientesPorEnsalada(ensalada, (result) => {
         var ingredientes = [];
         for (var i = 0; i < result.recordset.length; i++) {

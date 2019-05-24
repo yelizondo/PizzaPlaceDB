@@ -55,9 +55,11 @@ module.exports = {
 				return;
 			}
 
-			request.input('Orden', sql.VarChar(4000), pOrden)
+			console.log(JSON.stringify(pOrden));
 
-			request.execute('SP_InsertOrden', function (err, recordset, returnValue) {
+			request.input('Orden', sql.VarChar(4000), JSON.stringify(pOrden))
+
+			request.execute('SP_InsertarOrden', function (err, recordset, returnValue) {
 				if (err)
 				{
 					console.log(err);

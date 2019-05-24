@@ -434,5 +434,69 @@ module.exports = {
 				connection.close();
 			});
 		});
+	},
+
+	consultarPrecioEnsalada: function (args, callback)
+	{
+		var pTamanno = args.Tamanno;
+		var connection = new sql.ConnectionPool(dbConfig);
+		var request = new sql.Request(connection);
+		connection.connect (function (err)
+		{
+			if (err)
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+			var result = 0;
+			request.input('Tamanno', sql.VarChar(50), pTamanno)
+
+			request.execute('SP_ConsultarPrecioEnsalada', function (err, recordset, returnValue)
+			{
+				if (err)
+				{
+					console.log(err);
+				}
+				else
+				{
+					recordset.spName = 'consultarPrecioEnsalada';
+					callback(recordset);
+				}
+				connection.close();
+			});
+		});
+	},
+
+	consultarPrecioBebida: function (args, callback)
+	{
+		var pTamanno = args.Tamanno;
+		var connection = new sql.ConnectionPool(dbConfig);
+		var request = new sql.Request(connection);
+		connection.connect (function (err)
+		{
+			if (err)
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+			var result = 0;
+			request.input('Tamanno', sql.VarChar(50), pTamanno)
+
+			request.execute('SP_ConsultarPrecioBebida', function (err, recordset, returnValue)
+			{
+				if (err)
+				{
+					console.log(err);
+				}
+				else
+				{
+					recordset.spName = 'consultarPrecioBebida';
+					callback(recordset);
+				}
+				connection.close();
+			});
+		});
 	}
 }

@@ -13,6 +13,36 @@ var dbConfig = {
 
 
 module.exports = {
+	ingredientesPorEnsalada: function (pEnsalada, callback)
+	{
+		var connection = new sql.ConnectionPool(dbConfig);
+		var request = new sql.Request(connection);
+		connection.connect (function (err)
+		{
+			if (err)
+			{
+				console.log("Found error!");
+				console.log(err);
+				return;
+			}
+
+			request.input('EnsaladaName', sql.VarChar(50), pEnsalada);
+
+			request.execute('SP_IngredientesPorEnsalada', function (err, recordset, returnValue)
+			{
+				if (err)
+				{
+					console.log(err);
+				}
+				else
+				{
+					recordset.spName = 'ingredientesPorEnsalada';
+					callback(recordset);
+				}
+				connection.close();
+			});
+		});
+	},
 	insertarOrden : (pOrden, callback) => {
 		var connection = new sql.ConnectionPool(dbConfig);
 		var request = new sql.Request(connection);

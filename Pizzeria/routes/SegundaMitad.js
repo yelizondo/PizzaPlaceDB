@@ -155,7 +155,7 @@ router.post('/finishSegundoSaborEspecial', (req, res) =>
     pizzaEnConstruccion.ingredientesP2 = prepareIngredients(req.body);
 
     var info = "?order=" + JSON.stringify(pizzaEnConstruccion);
-
+    pizzaEnConstruccion = {};
     res.redirect('/DosSaboresFinal' + info);
 });
 

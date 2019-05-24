@@ -422,4 +422,11 @@ router.get('/makePurchase', (req, res, next) => {
     res.redirect('/dashboard');
 });
 
+router.get('/logout', (req, res, next) => {
+    Orden = [];
+    Total = 0;
+    Cart = {};
+    res.redirect('/login/logout');
+});
+
 module.exports = router;

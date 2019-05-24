@@ -141,7 +141,7 @@ router.post('/finishUnSaborEspecial', (req, res) =>
     pizzaEnConstruccion.ingredientes = prepareIngredients(req.body);
 
     var info = "?order=" + JSON.stringify(pizzaEnConstruccion);
-
+    pizzaEnConstruccion = {};
     res.redirect('/dashboard/addToCart' + info);
 });
 

@@ -69,7 +69,7 @@ router.post('/readySecond', (req, res, next) => {
     }
 
     pizzaEnConstruccion.ingredientesP2 = listIng;
-
+    pizzaEnConstruccion = {};
     res.redirect('/DosSaboresFinal?order=' + JSON.stringify(pizzaEnConstruccion));
 });
 

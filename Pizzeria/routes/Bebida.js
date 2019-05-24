@@ -40,7 +40,7 @@ router.post('/iniciarCreacion', (req, res, next) =>
     bebidaEnConstruccion.cantidad = req.body.cantidad;
 
     var info = "?order=" + JSON.stringify(bebidaEnConstruccion);
-
+    bebidaEnConstruccion = {};
     res.redirect('/dashboard/addToCart' + info);
 });
 

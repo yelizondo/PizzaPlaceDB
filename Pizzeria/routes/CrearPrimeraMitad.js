@@ -73,7 +73,7 @@ router.post('/readyFirst', (req, res, next) => {
 
     pizzaEnConstruccion.tipo = 'Pizza Personalizada';
     pizzaEnConstruccion.ingredientesP1 = listIng;
-
+    pizzaEnConstruccion = {};
     res.redirect('/CrearSegundaMitad?order=' + JSON.stringify(pizzaEnConstruccion));
 });
 

@@ -1,22 +1,25 @@
 <div class="container">
     <div class="panel panel-danger">
         <div class="panel-heading">Ensalada</div>
-        <form action="/Ensalada/iniciarCreacion" method='POST'>
+        <form action="/Ensalada/iniciarCreacion" id="iniciarCreacion" method='POST'></form>
+        <form action="/Ensalada/setIngredientes" id="setIngredientes"  method="POST" ></form>
         <div class="panel-body">
             <h1>Ajustar Ensalada:</h1>
             <div class="row">
                 <div class="col-md-4">
                     <p>Seleccione la ensalada que desea:</p>
                     <div>
-                        <select class="select-css" id="table1" name="ensalada">
+                        <select form="setIngredientes" class="select-css dpdown-ensalada" id="table1" name="ensalada">
                             {{#each resEnsaladas}}
                                 <option value="{{this}}">{{this}}</option>
                             {{/each}}
                         </select>
+                        <input form="setIngredientes" type="submit" class="btn btn-danger dpdown-ensalada" name="seguir" value="Seleccionar">
                     </div>
-                    <p>Seleccione el tamaño que desea:</p>
+
+                    <p id="p-tamanno">Seleccione el tamaño que desea:</p>
                     <div>
-                        <select class="select-css" id="table2" name="tamanno">
+                        <select form="iniciarCreacion" class="select-css" id="table2" name="tamanno">
                             {{#each resTamannosEnsalada}}
                                 <option value="{{this}}">{{this}}</option>
                             {{/each}}
@@ -24,7 +27,7 @@
                     </div>
                     <p>Adicionar Vinagreta:</p>
                     <div>
-                        <select class="select-css" id="table3" name="vinagreta">
+                        <select form="iniciarCreacion" class="select-css" id="table3" name="vinagreta">
                             <option value="Ninguna" selected>Ninguna</option>
                             {{#each resVinagretas}}
                                 <option value="{{this}}">{{this}}</option>
@@ -42,10 +45,15 @@
                                 <th>Extra</th>
                             </tr>
                             {{#each resIngredientes}}
-                                <tr name="ingrediente">
-                                    <td>{{this}}</td>
-                                    <td><input type="checkbox" name="ag-{{this}}"></td>
-                                    <td><input type="checkbox" name="ex-{{this}}"></td>
+                                <tr>
+                                    <td>{{this.ingrediente}}</td>
+                                    {{#if this.check}}
+                                        <td><input form="iniciarCreacion" type="checkbox" name="ag-{{this.ingrediente}}"checked></td>
+                                    {{else}}
+                                        <td><input form="iniciarCreacion" type="checkbox" name="ag-{{this.ingrediente}}"></td>
+                                    {{/if}}
+
+                                    <td><input form="iniciarCreacion" type="checkbox" name="ex-{{this.ingrediente}}"></td>
                                 </tr>
                             {{/each}}
                         </table>
@@ -54,10 +62,10 @@
                 <div class="col-md-4">
                     <div class="div-group">
                         <label for="cantidad">Cantidad de ensaladas:</label>
-                        <input name="cantidad" type="text" class="form-control" id="cantidad" required>
+                        <input form="iniciarCreacion" name="cantidad" type="text" class="form-control" id="cantidad" required>
                     </div>
                     <div class="checkbox" name="checkbox">
-                        <label><input type="checkbox" name="pollo">Añadir Pollo</label>
+                        <label><input form="iniciarCreacion" type="checkbox" name="pollo">Añadir Pollo</label>
                     </div>
                 </div>
             </div>
@@ -70,10 +78,9 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <input type="submit" class="btn btn-danger" name="Añadir al Carrito" value="Añadir al Carrito">
+                    <input form="iniciarCreacion" type="submit" class="btn btn-danger" name="Añadir al Carrito" value="Añadir al Carrito">
                 </div>
             </div>
         </div>
-        </form>
     </div>
 </div>

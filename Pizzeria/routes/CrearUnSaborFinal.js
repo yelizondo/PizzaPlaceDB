@@ -68,7 +68,7 @@ router.post('/finalizarUnSabor', (req, res, next) => {
     pizzaEnConstruccion.ingredientes = listIng;
 
     var info = "?order=" + JSON.stringify(pizzaEnConstruccion);
-
+    pizzaEnConstruccion = {};
     res.redirect('/dashboard/addToCart' + info);
 });
 

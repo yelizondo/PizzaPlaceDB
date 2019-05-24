@@ -1,9 +1,11 @@
+/*jshint esversion: 6 */
 var express = require('express');
 var router = express.Router();
 var dbcon = require('../public/javascripts/serverconnection.js');
 var dtCPM = require('../public/javascripts/querier.js');
 
 var ensaladaEnConstruccion = {};
+var Ingredientes = [];
 
 function cleanIng(ing)
 {
@@ -24,14 +26,39 @@ router.get('/', function(req, res, next)
             [dbcon.todasLasVinagretas, "Descripcion"],
             [dbcon.todosLosIngredientes, "DESCRIPCION"]
         ], (result) => {
-            res.render('Ensalada', {
-                title: 'Seleccionar Ensalada',
-                style: 'styles.css',
-                resEnsaladas: result.todasLasEnsaladas,
-                resTamannosEnsalada: result.todosLostamannosEnsalada,
-                resVinagretas: result.todasLasVinagretas,
-                resIngredientes: result.todosLosIngredientes
-            });
+
+            if (req.query.ings) {
+                console.log(req.query.ings);
+                var ings = JSON.parse(req.query.ings);
+
+                var allIng = [];
+
+                for (let i = 0; i < ings.length; i++)
+                {
+                    allIng.push({ingrediente: ings[i], check: true});
+                }
+                res.render('Ensalada', {
+                    title: 'Seleccionar Ensalada',
+                    style: 'Ensalada.css',
+                    resEnsaladas: result.todasLasEnsaladas,
+                    resTamannosEnsalada: result.todosLostamannosEnsalada,
+                    resVinagretas: result.todasLasVinagretas,
+                    resIngredientes: allIng
+                });
+            }
+            else
+            {
+                res.render('Ensalada', {
+                    title: 'Seleccionar Ensalada',
+                    style: 'Ensalada.css',
+                    resEnsaladas: result.todasLasEnsaladas,
+                    resTamannosEnsalada: result.todosLostamannosEnsalada,
+                    resVinagretas: result.todasLasVinagretas,
+                    resIngredientes: []
+                });
+            }
+
+
         });
     }
 });
@@ -77,8 +104,23 @@ router.post('/iniciarCreacion', (req, res, next) =>
     ensaladaEnConstruccion.cantidad = req.body.cantidad;
     ensaladaEnConstruccion.ingredientes = listIng;
     var info = "?order=" + JSON.stringify(ensaladaEnConstruccion);
-
+    ensaladaEnConstruccion = {};
     res.redirect('/dashboard/addToCart' + info);
+});
+
+router.post('/setIngredientes', (req, res, next) =>
+{
+    var ensalada = req.body.ensalada;
+    dbcon.ingredientesPorEnsalada(ensalada, (result) => {
+        var ingredientes = [];
+        for (var i = 0; i < result.recordset.length; i++) {
+            ingredientes.push(result.recordset[i].Descripcion);
+        }
+        var items = '?ings=' + JSON.stringify(ingredientes);
+
+        res.redirect('/Ensalada' + items);
+    });
+
 });
 
 module.exports = router;

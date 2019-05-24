@@ -54,7 +54,7 @@ router.get('/', function(req, res, next) {
             }
         }
 
-        res.render('dashboard', {
+        res.render( 'dashboard', {
             title: 'Dashboard',
             style: 'dashboard.css',
             resOrden: Orden,

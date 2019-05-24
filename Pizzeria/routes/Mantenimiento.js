@@ -28,18 +28,6 @@ router.get('/', function(req, res, next)
     }
 });
 
-var a = {
-  Nombre: 'a',
-  'Pequeña': '1',
-  Mediana: '2',
-  Grande: '3',
-  'Extra Grande': '4',
-  Fiestera: '5',
-  Pepperoni: 'on',
-  Anchoas: 'on',
-  Add: 'Add'
-};
-
 
 router.post('/CreateSpecialPizza', (req, res, next) => {
     var body = req.body;
@@ -78,8 +66,10 @@ router.post('/CreateSpecialPizza', (req, res, next) => {
     nuevaPizza.ingredientes = ingredientes;
     nuevaPizza.preciosXTamanno = preciosXTamanno;
 
-
-    res.redirect('/Mantenimiento');
+    dbcon.insertNewPizza(nuevaPizza, (result) =>
+    {
+        res.redirect('/Mantenimiento');
+    });
 });
 
 module.exports = router;

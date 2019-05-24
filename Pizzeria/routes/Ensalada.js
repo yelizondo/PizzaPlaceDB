@@ -28,7 +28,6 @@ router.get('/', function(req, res, next)
         ], (result) => {
 
             if (req.query.ings) {
-                console.log(req.query.ings);
                 var ings = JSON.parse(req.query.ings);
 
                 var allIng = [];

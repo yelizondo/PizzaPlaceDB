@@ -7,6 +7,7 @@ var dbcon = require('../public/javascripts/serverconnection.js');
 var Orden = [];
 var Total = 0;
 var Cart = {};
+var Consecutive = 0;
 
 function generarQueryPizza(listaIngredientes, tamanno)
 {
@@ -36,7 +37,7 @@ function generarQueryPizza(listaIngredientes, tamanno)
 function addOrderToCart(pType, pQuantity, pExtraInfo)
 {
     var detail = {};
-
+    detail.consecutive = ++Consecutive;
     switch (pType)
     {
         case 'Bebida':
@@ -222,7 +223,7 @@ router.get('/addToCart', (req, res, next) => {
                 precio *= parseInt(obj.cantidad);
 
                 order = {
-                    elemento: obj.tipo,
+                    elemento: obj.tipoOrden,
                     tamanno: obj.tamanno,
                     cantidad: obj. cantidad,
                     detalles: ing,
@@ -268,7 +269,7 @@ router.get('/addToCart', (req, res, next) => {
                         ext = ext + ' ' + obj.ingredientes[i].name;
                     }
                 }
-
+                console.log(obj);
                 order = {
                     elemento: obj.tipo,
                     tamanno: obj.tamanno,
@@ -417,6 +418,7 @@ router.get('/makePurchase', (req, res, next) => {
 
     // Limpio el carrito
     Cart = {};
+    Consecutive = 0;
 
     // Redirecciono a la pagina principal
     res.redirect('/dashboard');
@@ -426,6 +428,7 @@ router.get('/logout', (req, res, next) => {
     Orden = [];
     Total = 0;
     Cart = {};
+    Consecutive = 0;
     res.redirect('/login/logout');
 });
 
